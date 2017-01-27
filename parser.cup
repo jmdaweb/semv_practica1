@@ -1,0 +1,93 @@
+/* TOKENS */
+
+// terminals
+terminal treturn, l_par, r_par, l_brace, r_brace, l_bracket, r_bracket, comma, semicolon;
+terminal assig, add, sub, mul, div, tif, tthen, telse, tfor, twhile, tdo, tuntil, tnot, tand, tor, equals;
+terminal less, greater, lessequal, greaterequal, include, hfile, constint, constfloat, tvoid, tint, tfloat, tboolean;
+terminal tid;
+
+// non terminals
+non terminal PROGRAM, PART, BLQ, SENTLIST, SENT, EXP, EXPT, FACTOR, TYPE, LID, LISTPARAM, RESTPART,LCOND,LCONDT, LCONDF, COND,OPR;
+
+/* GRAMMAR */
+
+PROGRAM ::= PART PROGRAM 
+    | PART 
+;
+
+PART ::= TYPE RESTPART 
+;
+
+RESTPART ::= tid l_par LISTPARAM r_par BLQ 
+;
+
+LISTPARAM ::= LISTPARAM comma TYPE tid 
+    | TYPE tid 
+;
+
+BLQ ::= l_brace SENTLIST r_brace 
+;
+
+SENTLIST ::= SENTLIST SENT 
+    | SENT 
+;
+
+SENT ::= TYPE LID semicolon  
+    | tid assig EXP semicolon  
+    | tid l_par LID r_par semicolon  
+    | treturn EXP semicolon  
+    | tif l_par LCOND r_par tthen BLQ telse BLQ 
+    | tfor l_par tid assig EXP semicolon LCOND semicolon tid assig EXP r_par BLQ 
+    | twhile l_par LCOND r_par BLQ 
+    | tdo BLQ tuntil l_par LCOND r_par 
+    | BLQ 
+;
+
+LID ::= tid 
+    | tid comma LID 
+    | /* empty */ 
+;
+
+EXP ::= EXP add EXPT 
+    | EXP sub EXPT 
+    | EXPT  
+;
+
+EXPT ::= EXPT mul FACTOR 
+    | EXPT div FACTOR 
+    | FACTOR 
+;
+
+FACTOR ::= tid l_par LID r_par 
+    | l_bracket EXP r_bracket 
+    | tid 
+    | constint  
+    | constfloat 
+;
+
+TYPE ::= tvoid 
+    | tint  
+    | tfloat 
+;
+
+LCOND::= LCOND tor LCONDT 
+        | LCONDT 
+;
+
+LCONDT::= LCONDT tand LCONDF 
+        |LCONDF 
+;
+
+LCONDF ::= COND 
+        | tnot COND 
+;
+
+COND ::= EXP OPR EXP 
+;
+
+OPR::=  equals 
+    | less 
+    | greater 
+    | greaterequal 
+    | lessequal 
+;
