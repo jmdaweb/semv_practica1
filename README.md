@@ -1,1 +1,0 @@
-# semv_practica1
