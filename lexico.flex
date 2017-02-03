@@ -1,3 +1,5 @@
+package com.semv.practica1.lexer;
+import com.semv.practica1.syntactic.sym;
 import java_cup.runtime.*;
 
 %%
