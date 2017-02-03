@@ -35,6 +35,7 @@ public class sym {
   public static final int telse = 18;
   public static final int l_par = 3;
   public static final int r_bracket = 8;
+  public static final int filename = 40;
   public static final int constint = 33;
   public static final int l_brace = 5;
   public static final int greater = 28;
@@ -88,7 +89,8 @@ public class sym {
   "tint",
   "tfloat",
   "tboolean",
-  "tid"
+  "tid",
+  "filename"
   };
 }
 
