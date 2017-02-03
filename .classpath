@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
+	<classpathentry excluding="main/java/com/muii/semv/|main/java/com/muii/" kind="src" path="src"/>
 	<classpathentry kind="lib" path="java-cup-11b-runtime.jar"/>
 	<classpathentry kind="lib" path="java-cup-11b.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
