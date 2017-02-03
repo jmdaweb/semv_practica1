@@ -10,7 +10,7 @@ import java_cup.runtime.*;
  * <a href="http://www.jflex.de/">JFlex</a> 1.6.1
  * from the specification file <tt>lexico.flex</tt>
  */
-class AnalizadorLexico implements java_cup.runtime.Scanner {
+public class AnalizadorLexico implements java_cup.runtime.Scanner {
 
   /** This character denotes the end of file */
   public static final int YYEOF = -1;
@@ -321,7 +321,7 @@ class AnalizadorLexico implements java_cup.runtime.Scanner {
    *
    * @param   in  the java.io.Reader to read input from.
    */
-  AnalizadorLexico(java.io.Reader in) {
+  public AnalizadorLexico(java.io.Reader in) {
     this.zzReader = in;
   }
 
