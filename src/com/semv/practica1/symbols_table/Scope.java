@@ -42,7 +42,7 @@ public class Scope {
 		this.children.add(child);
 	}
 	
-	public String getNombre(){
-		return this.nombre;
+	public String getName(){
+		return this.name;
 	}
 }
