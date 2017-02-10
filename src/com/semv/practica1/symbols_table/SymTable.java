@@ -10,8 +10,13 @@ public class SymTable {
 		this.items = new HashMap<String, SymAttributes>();
 	}
 	
-	public void addItem (String key, SymAttributes value) {
-		this.items.put(key, value);
+	public boolean addItem (String key, SymAttributes value) {
+		if (this.getAttributes(key)==null){
+			this.items.put(key, value);
+			return true;
+		}else{
+			return false;
+		}
 	}
 	
 	public SymAttributes getAttributes (String key) {
