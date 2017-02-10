@@ -1,5 +1,5 @@
 /* TOKENS */
-
+import com.semv.practica1.symbols_table.ScopeTree;
 // terminals
 terminal treturn, l_par, r_par, l_brace, r_brace, l_bracket, r_bracket, comma, semicolon;
 terminal assig, add, sub, mul, div, tif, tthen, telse, tfor, twhile, tdo, tuntil, tnot, tand, tor, equals;
