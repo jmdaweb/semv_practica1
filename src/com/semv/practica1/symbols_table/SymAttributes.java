@@ -5,11 +5,13 @@ public class SymAttributes {
 	private String type;
 	private int row;
 	private int col;
+	private String name;
 	
-	public SymAttributes (String type, int row, int col) {
+	public SymAttributes (String type, int row, int col, String name) {
 		this.type = type;
 		this.row = row;
 		this.col = col;
+		this.name=name;
 	}
 	
 	public String getType () {
@@ -22,6 +24,10 @@ public class SymAttributes {
 	
 	public int getCol () {
 		return this.col;
+	}
+	
+	public String getName(){
+		return this.name;
 	}
 	
 }
