@@ -30,7 +30,7 @@ public class parser extends java_cup.runtime.lr_parser {
   /** Production table. */
   protected static final short _production_table[][] = 
     unpackFromStrings(new String[] {
-    "\000\070\000\002\002\004\000\002\002\004\000\002\002" +
+    "\000\060\000\002\002\004\000\002\002\004\000\002\002" +
     "\003\000\002\003\004\000\002\015\007\000\002\014\006" +
     "\000\002\014\004\000\002\004\005\000\002\005\004\000" +
     "\002\005\003\000\002\006\005\000\002\006\006\000\002" +
@@ -44,10 +44,7 @@ public class parser extends java_cup.runtime.lr_parser {
     "\002\012\003\000\002\016\005\000\002\016\003\000\002" +
     "\017\005\000\002\017\003\000\002\020\003\000\002\020" +
     "\004\000\002\021\005\000\002\022\003\000\002\022\003" +
-    "\000\002\022\003\000\002\022\003\000\002\022\003\000" +
-    "\002\023\004\000\002\024\005\000\002\024\004\000\002" +
-    "\025\003\000\002\025\004\000\002\026\007\000\002\027" +
-    "\005\000\002\027\003" });
+    "\000\002\022\003\000\002\022\003\000\002\022\003" });
 
   /** Access to production table. */
   public short[][] production_table() {return _production_table;}
@@ -724,78 +721,6 @@ class CUP$parser$actions {
               Object RESULT =null;
 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("OPR",16, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
-            }
-          return CUP$parser$result;
-
-          /*. . . . . . . . . . . . . . . . . . . .*/
-          case 48: // FILE ::= PREAMB PROGRAM 
-            {
-              Object RESULT =null;
-
-              CUP$parser$result = parser.getSymbolFactory().newSymbol("FILE",17, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
-            }
-          return CUP$parser$result;
-
-          /*. . . . . . . . . . . . . . . . . . . .*/
-          case 49: // PREAMB ::= include filename PREAMB 
-            {
-              Object RESULT =null;
-
-              CUP$parser$result = parser.getSymbolFactory().newSymbol("PREAMB",18, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
-            }
-          return CUP$parser$result;
-
-          /*. . . . . . . . . . . . . . . . . . . .*/
-          case 50: // PREAMB ::= include filename 
-            {
-              Object RESULT =null;
-
-              CUP$parser$result = parser.getSymbolFactory().newSymbol("PREAMB",18, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
-            }
-          return CUP$parser$result;
-
-          /*. . . . . . . . . . . . . . . . . . . .*/
-          case 51: // FILEINC ::= PARTINC 
-            {
-              Object RESULT =null;
-
-              CUP$parser$result = parser.getSymbolFactory().newSymbol("FILEINC",19, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
-            }
-          return CUP$parser$result;
-
-          /*. . . . . . . . . . . . . . . . . . . .*/
-          case 52: // FILEINC ::= PARTINC FILEINC 
-            {
-              Object RESULT =null;
-
-              CUP$parser$result = parser.getSymbolFactory().newSymbol("FILEINC",19, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
-            }
-          return CUP$parser$result;
-
-          /*. . . . . . . . . . . . . . . . . . . .*/
-          case 53: // PARTINC ::= TYPE tid l_par LISTPARAMF r_par 
-            {
-              Object RESULT =null;
-
-              CUP$parser$result = parser.getSymbolFactory().newSymbol("PARTINC",20, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-4)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
-            }
-          return CUP$parser$result;
-
-          /*. . . . . . . . . . . . . . . . . . . .*/
-          case 54: // LISTPARAMF ::= LISTPARAMF comma TYPE 
-            {
-              Object RESULT =null;
-
-              CUP$parser$result = parser.getSymbolFactory().newSymbol("LISTPARAMF",21, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
-            }
-          return CUP$parser$result;
-
-          /*. . . . . . . . . . . . . . . . . . . .*/
-          case 55: // LISTPARAMF ::= TYPE 
-            {
-              Object RESULT =null;
-
-              CUP$parser$result = parser.getSymbolFactory().newSymbol("LISTPARAMF",21, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
 

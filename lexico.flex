@@ -4,7 +4,6 @@ import java_cup.runtime.*;
 
 %%
 
-%public
 %class AnalizadorLexico
 
 %line
@@ -19,7 +18,6 @@ WhiteSpace     = {LineTerminator} | [ \t\f]
 TraditionalComment   = "/*" [^*] ~"*/" | "/*" "*"+ "/"
 EndOfLineComment     = "//" {InputCharacter}* {LineTerminator}
 Comment = {TraditionalComment} | {EndOfLineComment}
-filename = [a-zA-Z0-9_]+ ".h"
 
 %%
 
@@ -56,7 +54,7 @@ filename = [a-zA-Z0-9_]+ ".h"
 ">="    { return new java_cup.runtime.Symbol(sym.greaterequal);	 }
 "<="    { return new java_cup.runtime.Symbol(sym.lessequal);	 }
 "#include"	{ return new java_cup.runtime.Symbol(sym.include);	 }
-{filename} { return new java_cup.runtime.Symbol(sym.hfile);	 }
+[a-zA-Z0-9_]+ ".h" { return new java_cup.runtime.Symbol(sym.hfile);	 }
 
 [a-zA-Z] [a-zA-Z0-9_]*	{ return new java_cup.runtime.Symbol(sym.tid);	 }
 ("-")? [0-9]+ { return new java_cup.runtime.Symbol(sym.constint);	 }

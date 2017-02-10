@@ -5,11 +5,9 @@ terminal treturn, l_par, r_par, l_brace, r_brace, l_bracket, r_bracket, comma, s
 terminal assig, add, sub, mul, div, tif, tthen, telse, tfor, twhile, tdo, tuntil, tnot, tand, tor, equals;
 terminal less, greater, lessequal, greaterequal, include, hfile, constint, constfloat, tvoid, tint, tfloat, tboolean;
 terminal tid;
-terminal filename;
 
 // non terminals
 non terminal PROGRAM, PART, BLQ, SENTLIST, SENT, EXP, EXPT, FACTOR, TYPE, LID, LISTPARAM, RESTPART,LCOND,LCONDT, LCONDF, COND,OPR;
-non terminal FILE, PREAMB, FILEINC, PARTINC, LISTPARAMF;
 
 /* GRAMMAR */
 
@@ -92,15 +90,4 @@ OPR::=  equals
     | greater 
     | greaterequal 
     | lessequal 
-;
-
-FILE ::= PREAMB PROGRAM
-;
-PREAMB ::= include filename PREAMB | include filename
-;
-FILEINC ::= PARTINC | PARTINC FILEINC
-;
-PARTINC ::= TYPE tid l_par LISTPARAMF r_par 
-;
-LISTPARAMF ::= LISTPARAMF comma TYPE | TYPE
 ;
