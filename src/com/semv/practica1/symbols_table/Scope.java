@@ -45,4 +45,7 @@ public class Scope {
 	public String getName(){
 		return this.name;
 	}
+	public SymTable getSymTable(){
+		return this.symTable;
+	}
 }

@@ -32,10 +32,23 @@ SENTLIST ::= SENTLIST SENT
     | SENT 
 ;
 
-SENT ::= TYPE LID semicolon  
-    | tid assig EXP semicolon  
-    | tid l_par LID r_par semicolon  
-    | treturn EXP semicolon  
+SENT ::= TYPE:t LID:id semicolon  {:
+//declaración
+	if (ScopeTree.getCurrentScope().getSymTable().addItem(id, new SymAttributes(t.toString(), iirow, iicolumn, id.toString()))==true){
+		
+	}else{
+		
+	}
+:}
+    | tid:id assig EXP:exp semicolon  {:
+//asignación
+:}
+    | tid l_par LID r_par semicolon  {:
+//llamada a una función
+:}
+    | treturn EXP semicolon  {:
+//retorno de una función
+:}
     | tif l_par LCOND r_par tthen BLQ telse BLQ 
     | tfor l_par tid assig EXP semicolon LCOND semicolon tid assig EXP r_par BLQ 
     | twhile l_par LCOND r_par BLQ 
