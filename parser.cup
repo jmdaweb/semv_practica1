@@ -34,7 +34,7 @@ SENTLIST ::= SENTLIST SENT
 
 SENT ::= TYPE:t LID:id semicolon  {:
 //declaración
-	if (ScopeTree.getCurrentScope().getSymTable().addItem(id, new SymAttributes(t.toString(), iirow, iicolumn, id.toString()))==true){
+	if (ScopeTree.getCurrentScope().getSymTable().addItem(scanner.yytext(), new SymAttributes(t.value, scanner.yyline, scanner.iicolumn, scanner.yytext()))==true){
 		
 	}else{
 		

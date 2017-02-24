@@ -2,19 +2,19 @@ package com.semv.practica1.symbols_table;
 
 public class SymAttributes {
 	
-	private String type;
+	private int type;
 	private int row;
 	private int col;
 	private String name;
 	
-	public SymAttributes (String type, int row, int col, String name) {
+	public SymAttributes (int type, int row, int col, String name) {
 		this.type = type;
 		this.row = row;
 		this.col = col;
 		this.name=name;
 	}
 	
-	public String getType () {
+	public int getType () {
 		return this.type;
 	}
 	
