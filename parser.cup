@@ -1,5 +1,6 @@
 /* TOKENS */
-import com.semv.practica1.symbols_table.ScopeTree;
+import com.semv.practica1.symbols_table.*;
+
 // terminals
 terminal treturn, l_par, r_par, l_brace, r_brace, l_bracket, r_bracket, comma, semicolon;
 terminal assig, add, sub, mul, div, tif, tthen, telse, tfor, twhile, tdo, tuntil, tnot, tand, tor, equals;
@@ -33,11 +34,12 @@ SENTLIST ::= SENTLIST SENT
 ;
 
 SENT ::= TYPE:t LID:id semicolon  {:
+SymAttributes symAttributes = new SymAttributes(t.getName(), id.getRow(), id.getCol(), id.getName());
 //declaraciÃ³n
-	if (ScopeTree.getCurrentScope().getSymTable().addItem(scanner.yytext(), new SymAttributes(t.value, scanner.yyline, scanner.iicolumn, scanner.yytext()))==true){
-		
+	if (ScopeTree.getCurrentScope().getSymTable().addItem(id.getName, symAttributes){
+		result = symAttributes;
 	}else{
-		
+		System.out.println("El símbolo " + id.getName + " existe. Lin " + id.getRow + " Col " + id.getCol);
 	}
 :}
     | tid:id assig EXP:exp semicolon  {:
@@ -56,7 +58,7 @@ SENT ::= TYPE:t LID:id semicolon  {:
     | BLQ 
 ;
 
-LID ::= tid 
+LID ::= tid {: result = new Symbol(Scanner.yytext(), Scanner.yyline, Scanner.yycolumn) :}
     | tid comma LID 
     | /* empty */ 
 ;
@@ -78,9 +80,9 @@ FACTOR ::= tid l_par LID r_par
     | constfloat 
 ;
 
-TYPE ::= tvoid 
-    | tint  
-    | tfloat 
+TYPE ::= tvoid {: result = new Symbol(Scanner.yytext(), Scanner.yyline, Scanner.yycolumn) :} 
+    | tint {: result = new Symbol(Scanner.yytext(), Scanner.yyline, Scanner.yycolumn) :} 
+    | tfloat {: result = new Symbol(Scanner.yytext(), Scanner.yyline, Scanner.yycolumn) :} 
 ;
 
 LCOND::= LCOND tor LCONDT 
