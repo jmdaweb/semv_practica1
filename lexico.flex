@@ -12,6 +12,15 @@ import java_cup.runtime.*;
 
 %cup
 
+%{
+public int getYyline(){
+	return yyline;
+}
+public int getYycolumn(){
+	return yycolumn;
+}
+%}
+
 LineTerminator = \r|\n|\r\n
 InputCharacter = [^\r\n]
 WhiteSpace     = {LineTerminator} | [ \t\f]

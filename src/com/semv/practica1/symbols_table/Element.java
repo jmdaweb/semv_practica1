@@ -1,12 +1,12 @@
 package com.semv.practica1.symbols_table;
 
-public class Symbol {
+public class Element {
 	
 	private String name;
 	private int line;
 	private int column;
 	
-	public Symbol (String name, int line, int column) {
+	public Element (String name, int line, int column) {
 		this.name = name;
 		this.line = line;
 		this.column = column;

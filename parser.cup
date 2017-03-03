@@ -1,18 +1,27 @@
 /* TOKENS */
+import com.semv.practica1.lexer.AnalizadorLexico;
 import com.semv.practica1.symbols_table.Element;
 import com.semv.practica1.symbols_table.ScopeTree;
 import com.semv.practica1.symbols_table.Scope;
 import com.semv.practica1.symbols_table.SymAttributes;
-import java_cup.runtime.Scanner;
-
+import java.util.ArrayList;
+action code {:
+AnalizadorLexico scanner=(AnalizadorLexico)getScanner();
+:}
 // terminals
 terminal treturn, l_par, r_par, l_brace, r_brace, l_bracket, r_bracket, comma, semicolon;
 terminal assig, add, sub, mul, div, tif, tthen, telse, tfor, twhile, tdo, tuntil, tnot, tand, tor, equals;
-terminal less, greater, lessequal, greaterequal, include, hfile, constint, constfloat, tvoid, tint, tfloat, tboolean;
-terminal tid;
+terminal less, greater, lessequal, greaterequal, include, hfile, constint, constfloat;
+terminal Element tvoid;
+terminal Element tint;
+terminal Element tfloat;
+terminal Element tboolean;
+terminal Element tid;
 
 // non terminals
-non terminal PROGRAM, PART, BLQ, SENTLIST, SENT, EXP, EXPT, FACTOR, TYPE, LID, LISTPARAM, RESTPART,LCOND,LCONDT, LCONDF, COND,OPR;
+non terminal PROGRAM, PART, BLQ, SENTLIST, SENT, EXP, EXPT, FACTOR, LISTPARAM, RESTPART,LCOND,LCONDT, LCONDF, COND,OPR;
+non terminal ArrayList<Element> LID;
+non terminal Element TYPE;
 
 /* GRAMMAR */
 
@@ -37,16 +46,20 @@ SENTLIST ::= SENTLIST SENT
     | SENT 
 ;
 
-SENT ::= TYPE:t LID:id semicolon  {:
-SymAttributes symAttributes = new SymAttributes(t.getName(), id.getRow(), id.getCol(), id.getName());
+SENT ::= TYPE:t LID:l semicolon  {:
+for (Element id:l){
+SymAttributes symAttributes = new SymAttributes(t.getName(), id.getLine(), id.getColumn(), id.getName());
 //declaración
 System.out.println(t.getName());
-	if (ScopeTree.getCurrentScope().getSymTable().addItem(id.getName, symAttributes)){
+	if (ScopeTree.getCurrentScope().getSymTable().addItem(id.getName(), symAttributes)){
 		RESULT = symAttributes;
 	}
 	else{
-		System.out.println("El s�mbolo " + id.getName + " existe. Lin " + id.getRow + " Col " + id.getCol);
+		System.out.println("El s�mbolo " + id.getName() + " existe. Lin " + id.getLine() + " Col " + id.getColumn());
+		RESULT=new SymAttributes("error", -1, -1, "error");
+		break;
 	}
+}
 :}
     | tid:id assig EXP:exp semicolon  {:
 //asignación
@@ -64,8 +77,16 @@ System.out.println(t.getName());
     | BLQ 
 ;
 
-LID ::= tid {: RESULT = new Element(Scanner.yytext(), Scanner.yyline, Scanner.yycolumn); :}
-    | tid comma LID 
+LID ::= tid {:
+Element e=new Element(scanner.yytext(), scanner.getYyline(), scanner.getYycolumn());
+ArrayList<Element> salida=new ArrayList<Element>();
+salida.add(e);
+RESULT=salida;
+:}
+    | tid:t comma LID:l {:
+l.add(t);
+RESULT=l;
+:}
     | /* empty */ 
 ;
 
@@ -86,9 +107,9 @@ FACTOR ::= tid l_par LID r_par
     | constfloat 
 ;
 
-TYPE ::= tvoid {: RESULT = new Element(Scanner.yytext(), Scanner.yyline, Scanner.yycolumn); :}
-    | tint {: RESULT = new Element(Scanner.yytext(), Scanner.yyline, Scanner.yycolumn); :}
-    | tfloat {: RESULT = new Element(Scanner.yytext(), Scanner.yyline, Scanner.yycolumn); :}
+TYPE ::= tvoid {: RESULT = new Element(scanner.yytext(), scanner.getYyline(), scanner.getYycolumn()); :}
+    | tint {: RESULT = new Element(scanner.yytext(), scanner.getYyline(), scanner.getYycolumn()); :}
+    | tfloat {: RESULT = new Element(scanner.yytext(), scanner.getYyline(), scanner.getYycolumn()); :}
 ;
 
 LCOND::= LCOND tor LCONDT 

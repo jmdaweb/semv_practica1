@@ -315,6 +315,14 @@ public class AnalizadorLexico implements java_cup.runtime.Scanner {
    */
   private int zzFinalHighSurrogate = 0;
 
+  /* user code: */
+public int getYyline(){
+	return yyline;
+}
+public int getYycolumn(){
+	return yycolumn;
+}
+
 
   /**
    * Creates a new scanner
