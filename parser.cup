@@ -1,5 +1,9 @@
 /* TOKENS */
-import com.semv.practica1.symbols_table.*;
+import com.semv.practica1.symbols_table.Element;
+import com.semv.practica1.symbols_table.ScopeTree;
+import com.semv.practica1.symbols_table.Scope;
+import com.semv.practica1.symbols_table.SymAttributes;
+import java_cup.runtime.Scanner;
 
 // terminals
 terminal treturn, l_par, r_par, l_brace, r_brace, l_bracket, r_bracket, comma, semicolon;
@@ -36,10 +40,12 @@ SENTLIST ::= SENTLIST SENT
 SENT ::= TYPE:t LID:id semicolon  {:
 SymAttributes symAttributes = new SymAttributes(t.getName(), id.getRow(), id.getCol(), id.getName());
 //declaraciÃ³n
-	if (ScopeTree.getCurrentScope().getSymTable().addItem(id.getName, symAttributes){
-		result = symAttributes;
-	}else{
-		System.out.println("El símbolo " + id.getName + " existe. Lin " + id.getRow + " Col " + id.getCol);
+System.out.println(t.getName());
+	if (ScopeTree.getCurrentScope().getSymTable().addItem(id.getName, symAttributes)){
+		RESULT = symAttributes;
+	}
+	else{
+		System.out.println("El sï¿½mbolo " + id.getName + " existe. Lin " + id.getRow + " Col " + id.getCol);
 	}
 :}
     | tid:id assig EXP:exp semicolon  {:
@@ -58,7 +64,7 @@ SymAttributes symAttributes = new SymAttributes(t.getName(), id.getRow(), id.get
     | BLQ 
 ;
 
-LID ::= tid {: result = new Symbol(Scanner.yytext(), Scanner.yyline, Scanner.yycolumn) :}
+LID ::= tid {: RESULT = new Element(Scanner.yytext(), Scanner.yyline, Scanner.yycolumn); :}
     | tid comma LID 
     | /* empty */ 
 ;
@@ -80,9 +86,9 @@ FACTOR ::= tid l_par LID r_par
     | constfloat 
 ;
 
-TYPE ::= tvoid {: result = new Symbol(Scanner.yytext(), Scanner.yyline, Scanner.yycolumn) :} 
-    | tint {: result = new Symbol(Scanner.yytext(), Scanner.yyline, Scanner.yycolumn) :} 
-    | tfloat {: result = new Symbol(Scanner.yytext(), Scanner.yyline, Scanner.yycolumn) :} 
+TYPE ::= tvoid {: RESULT = new Element(Scanner.yytext(), Scanner.yyline, Scanner.yycolumn); :}
+    | tint {: RESULT = new Element(Scanner.yytext(), Scanner.yyline, Scanner.yycolumn); :}
+    | tfloat {: RESULT = new Element(Scanner.yytext(), Scanner.yyline, Scanner.yycolumn); :}
 ;
 
 LCOND::= LCOND tor LCONDT 
