@@ -1,46 +1,42 @@
 /* TOKENS */
-import com.semv.practica1.lexer.AnalizadorLexico;
 import com.semv.practica1.symbols_table.Element;
 import com.semv.practica1.symbols_table.ScopeTree;
 import com.semv.practica1.symbols_table.Scope;
 import com.semv.practica1.symbols_table.SymAttributes;
 import java.util.ArrayList;
-action code {:
-AnalizadorLexico scanner=(AnalizadorLexico)getScanner();
-:}
 // terminals
-terminal Element comma;
-terminal Element semicolon;
-terminal Element treturn;
-terminal Element l_par;
-terminal Element r_par;
-terminal Element l_brace;
-terminal Element r_brace;
-terminal Element l_bracket;
-terminal Element r_bracket;
+terminal comma;
+terminal semicolon;
+terminal treturn;
+terminal l_par;
+terminal r_par;
+terminal l_brace;
+terminal r_brace;
+terminal l_bracket;
+terminal r_bracket;
 terminal equals;
-terminal Element assig;
-terminal Element add;
-terminal Element sub;
-terminal Element mul;
-terminal Element div;
-terminal Element tif;
-terminal Element tthen;
-terminal Element telse;
-terminal Element tfor;
-terminal Element twhile;
-terminal Element tdo;
-terminal Element tnot;
-terminal Element tuntil;
-terminal Element tand;
-terminal Element tor;
+terminal assig;
+terminal add;
+terminal sub;
+terminal mul;
+terminal div;
+terminal tif;
+terminal tthen;
+terminal telse;
+terminal tfor;
+terminal twhile;
+terminal tdo;
+terminal tnot;
+terminal tuntil;
+terminal tand;
+terminal tor;
 terminal less;
 terminal greater;
 terminal lessequal;
 terminal greaterequal;
 terminal Element constint;
 terminal Element constfloat;
-terminal Element include;
+terminal include;
 terminal Element hfile;
 terminal Element tvoid;
 terminal Element tint;
@@ -64,7 +60,7 @@ non terminal SymAttributes LCONDT;
 non terminal SymAttributes LCONDF;
 non terminal SymAttributes COND;
 non terminal OPR;
-non terminal ArrayList<Element> LID;
+non terminal SymAttributes LID;
 non terminal Element TYPE;
 
 /* GRAMMAR */
@@ -215,10 +211,9 @@ RESULT=new SymAttributes("", 0, 0, "");
     | BLQ:b {: RESULT=b; :}
 ;
 
-LID ::= tid {:
-Element e=new Element(scanner.yytext(), scanner.getYyline(), scanner.getYycolumn());
+LID ::= tid:id {:
 ArrayList<Element> salida=new ArrayList<Element>();
-salida.add(e);
+salida.add(id);
 RESULT=salida;
 :}
     | tid:t comma LID:l {:
@@ -277,13 +272,13 @@ RESULT=new SymAttributes("error", e.getRow(), e.getCol(), e.getName());
 FACTOR ::= tid l_par LID r_par 
     | l_bracket EXP:e r_bracket {: RESULT=e; :}
     | tid {: //comprobar si existe :}
-    | constint  {: RESULT = new SymAttributes("", scanner.getYyline(), scanner.getYycolumn(), scanner.yytext()); :}
-    | constfloat {: RESULT = new SymAttributes("", scanner.getYyline(), scanner.getYycolumn(), scanner.yytext()); :}
+    | constint:c  {: RESULT = new SymAttributes("int", c.getLine(), c.getColumn(), c.getName()); :}
+    | constfloat:c {: RESULT = new SymAttributes("float", c.getLine(), c.getColumn(), c.getName()); :}
 ;
 
-TYPE ::= tvoid {: RESULT = new Element(scanner.yytext(), scanner.getYyline(), scanner.getYycolumn()); :}
-    | tint {: RESULT = new Element(scanner.yytext(), scanner.getYyline(), scanner.getYycolumn()); :}
-    | tfloat {: RESULT = new Element(scanner.yytext(), scanner.getYyline(), scanner.getYycolumn()); :}
+TYPE ::= tvoid:t {: RESULT = t; :}
+    | tint:t {: RESULT = t; :}
+    | tfloat:t {: RESULT = t; :}
 ;
 
 LCOND::= LCOND:d tor LCONDT:t {:

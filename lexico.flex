@@ -1,5 +1,6 @@
 package com.semv.practica1.lexer;
 import com.semv.practica1.syntactic.sym;
+import com.semv.practica1.symbols_table.Element;
 import java_cup.runtime.*;
 
 %%
@@ -12,15 +13,6 @@ import java_cup.runtime.*;
 
 %cup
 
-%{
-public int getYyline(){
-	return yyline;
-}
-public int getYycolumn(){
-	return yycolumn;
-}
-%}
-
 LineTerminator = \r|\n|\r\n
 InputCharacter = [^\r\n]
 WhiteSpace     = {LineTerminator} | [ \t\f]
@@ -31,7 +23,7 @@ Comment = {TraditionalComment} | {EndOfLineComment}
 
 %%
 
-"void"    { return new java_cup.runtime.Symbol(sym.tvoid);	 }
+"void"    { return new Element(yytext(), yyline, yycolumn);	 }
 "return"    { return new java_cup.runtime.Symbol(sym.treturn);	 }
 "("    { return new java_cup.runtime.Symbol(sym.l_par);	 }
 ")"    { return new java_cup.runtime.Symbol(sym.r_par);	 }
@@ -40,8 +32,8 @@ Comment = {TraditionalComment} | {EndOfLineComment}
 "{"    { return new java_cup.runtime.Symbol(sym.l_brace);	 }
 "}"    { return new java_cup.runtime.Symbol(sym.r_brace);	 }
 ","    { return new java_cup.runtime.Symbol(sym.comma);	 }
-"int"    { return new java_cup.runtime.Symbol(sym.tint);	 }
-"float"    { return new java_cup.runtime.Symbol(sym.tfloat);	 }
+"int"    { return new Element(yytext(), yyline, yycolumn);	 }
+"float"    { return new Element(yytext(), yyline, yycolumn);	 }
 ";"    { return new java_cup.runtime.Symbol(sym.semicolon);	 }
 "="    { return new java_cup.runtime.Symbol(sym.assig);	 }
 "+"    { return new java_cup.runtime.Symbol(sym.add);	 }
@@ -64,11 +56,11 @@ Comment = {TraditionalComment} | {EndOfLineComment}
 ">="    { return new java_cup.runtime.Symbol(sym.greaterequal);	 }
 "<="    { return new java_cup.runtime.Symbol(sym.lessequal);	 }
 "#include"	{ return new java_cup.runtime.Symbol(sym.include);	 }
-[a-zA-Z0-9_]+ ".h" { return new java_cup.runtime.Symbol(sym.hfile);	 }
+[a-zA-Z0-9_]+ ".h" { return new Element(yytext(), yyline, yycolumn);	 }
 
-[a-zA-Z] [a-zA-Z0-9_]*	{ return new java_cup.runtime.Symbol(sym.tid);	 }
-("-")? [0-9]+ { return new java_cup.runtime.Symbol(sym.constint);	 }
-("-")? [0-9]+ "." [0-9]+ { return new java_cup.runtime.Symbol(sym.constfloat);	 }
+[a-zA-Z] [a-zA-Z0-9_]*	{ return new Element(yytext(), yyline, yycolumn);	 }
+("-")? [0-9]+ { return new Element(yytext(), yyline, yycolumn);	 }
+("-")? [0-9]+ "." [0-9]+ { return new Element(yytext(), yyline, yycolumn);	 }
 
 /* whitespace */
 {WhiteSpace}    { /* ignore */ }

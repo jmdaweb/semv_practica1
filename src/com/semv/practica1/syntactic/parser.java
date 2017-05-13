@@ -5,7 +5,6 @@
 
 package com.semv.practica1.syntactic;
 
-import com.semv.practica1.lexer.AnalizadorLexico;
 import com.semv.practica1.symbols_table.Element;
 import com.semv.practica1.symbols_table.ScopeTree;
 import com.semv.practica1.symbols_table.Scope;
@@ -272,10 +271,6 @@ public class parser extends java_cup.runtime.lr_parser {
 /** Cup generated class to encapsulate user supplied action code.*/
 @SuppressWarnings({"rawtypes", "unchecked", "unused"})
 class CUP$parser$actions {
-
-
-AnalizadorLexico scanner=(AnalizadorLexico)getScanner();
-
   private final parser parser;
 
   /** Constructor */
@@ -490,7 +485,7 @@ RESULT=l;
 		Element t = (Element)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-2)).value;
 		int lleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)).left;
 		int lright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)).right;
-		ArrayList<Element> l = (ArrayList<Element>)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-1)).value;
+		SymAttributes l = (SymAttributes)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-1)).value;
 		
 for (Element id:l){
 SymAttributes symAttributes = new SymAttributes(t.getName(), id.getLine(), id.getColumn(), id.getName());
@@ -698,11 +693,13 @@ RESULT=new SymAttributes("", 0, 0, "");
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 19: // LID ::= tid 
             {
-              ArrayList<Element> RESULT =null;
+              SymAttributes RESULT =null;
+		int idleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
+		int idright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
+		Element id = (Element)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
 		
-Element e=new Element(scanner.yytext(), scanner.getYyline(), scanner.getYycolumn());
 ArrayList<Element> salida=new ArrayList<Element>();
-salida.add(e);
+salida.add(id);
 RESULT=salida;
 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("LID",15, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
@@ -712,13 +709,13 @@ RESULT=salida;
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 20: // LID ::= tid comma LID 
             {
-              ArrayList<Element> RESULT =null;
+              SymAttributes RESULT =null;
 		int tleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)).left;
 		int tright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)).right;
 		Element t = (Element)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-2)).value;
 		int lleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int lright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
-		ArrayList<Element> l = (ArrayList<Element>)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
+		SymAttributes l = (SymAttributes)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
 		
 l.add(t);
 RESULT=l;
@@ -730,7 +727,7 @@ RESULT=l;
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 21: // LID ::= 
             {
-              ArrayList<Element> RESULT =null;
+              SymAttributes RESULT =null;
 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("LID",15, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
@@ -890,7 +887,10 @@ RESULT=new SymAttributes("error", e.getRow(), e.getCol(), e.getName());
           case 31: // FACTOR ::= constint 
             {
               SymAttributes RESULT =null;
-		 RESULT = new SymAttributes("", scanner.getYyline(), scanner.getYycolumn(), scanner.yytext()); 
+		int cleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
+		int cright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
+		Element c = (Element)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
+		 RESULT = new SymAttributes("int", c.getLine(), c.getColumn(), c.getName()); 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("FACTOR",7, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -899,7 +899,10 @@ RESULT=new SymAttributes("error", e.getRow(), e.getCol(), e.getName());
           case 32: // FACTOR ::= constfloat 
             {
               SymAttributes RESULT =null;
-		 RESULT = new SymAttributes("", scanner.getYyline(), scanner.getYycolumn(), scanner.yytext()); 
+		int cleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
+		int cright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
+		Element c = (Element)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
+		 RESULT = new SymAttributes("float", c.getLine(), c.getColumn(), c.getName()); 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("FACTOR",7, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -908,7 +911,10 @@ RESULT=new SymAttributes("error", e.getRow(), e.getCol(), e.getName());
           case 33: // TYPE ::= tvoid 
             {
               Element RESULT =null;
-		 RESULT = new Element(scanner.yytext(), scanner.getYyline(), scanner.getYycolumn()); 
+		int tleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
+		int tright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
+		Element t = (Element)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
+		 RESULT = t; 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("TYPE",16, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -917,7 +923,10 @@ RESULT=new SymAttributes("error", e.getRow(), e.getCol(), e.getName());
           case 34: // TYPE ::= tint 
             {
               Element RESULT =null;
-		 RESULT = new Element(scanner.yytext(), scanner.getYyline(), scanner.getYycolumn()); 
+		int tleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
+		int tright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
+		Element t = (Element)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
+		 RESULT = t; 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("TYPE",16, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -926,7 +935,10 @@ RESULT=new SymAttributes("error", e.getRow(), e.getCol(), e.getName());
           case 35: // TYPE ::= tfloat 
             {
               Element RESULT =null;
-		 RESULT = new Element(scanner.yytext(), scanner.getYyline(), scanner.getYycolumn()); 
+		int tleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
+		int tright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
+		Element t = (Element)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
+		 RESULT = t; 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("TYPE",16, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
