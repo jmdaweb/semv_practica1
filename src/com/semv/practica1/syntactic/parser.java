@@ -310,6 +310,8 @@ AnalizadorLexico scanner=(AnalizadorLexico)getScanner();
 		
 if ((p1.getType()=="error")||(p2.getType()=="error")){
 RESULT=new SymAttributes("error", p1.getRow(), p1.getCol(), p1.getName());
+}else{
+RESULT=p2;
 }
 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("PROGRAM",0, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
@@ -334,7 +336,10 @@ RESULT=new SymAttributes("error", p1.getRow(), p1.getCol(), p1.getName());
           case 2: // PROGRAM ::= PART 
             {
               SymAttributes RESULT =null;
-
+		int pleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
+		int pright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
+		SymAttributes p = (SymAttributes)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
+		 RESULT=p; 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("PROGRAM",0, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -351,16 +356,21 @@ RESULT=new SymAttributes("error", p1.getRow(), p1.getCol(), p1.getName());
 		SymAttributes r = (SymAttributes)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
 		
 //Esto es la definición de una función. Vamos a buscarla, y si ya existe, emitimos error.
+if (r.getType()==t.getName()){
 Scope scope=ScopeTree.getCurrentScope();
 if (scope.getSymTable().getAttributes(r.getName())==null){ //no existe, vamos a agregarlo
 scope.getSymTable().addItem(r.getName(), new SymAttributes(t.getName(), r.getRow(), r.getCol(), r.getName()));
 scope.addChild(new Scope(scope, r.getName()));
 RESULT=r;
-}else if (r.getType()=="error"){
-RESULT=r; //propagamos el error sin crear nada
 }else{ //no tiene error, pero existe
 System.out.println("Identificador de función duplicado. Línea "+r.getRow()+", columna "+r.getCol());
 RESULT=new SymAttributes("error", r.getRow(), r.getCol(), r.getName());
+}
+}else if (r.getType()=="error"){
+RESULT=r; //propagamos el error sin crear nada
+}else{
+System.out.println("El tipo de retorno de la función no coincide con el tipo declarado en su cabecera. Línea "+r.getRow()+", columna "+r.getCol());
+RESULT=r;
 }
 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("PART",1, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
@@ -371,6 +381,22 @@ RESULT=new SymAttributes("error", r.getRow(), r.getCol(), r.getName());
           case 4: // RESTPART ::= tid l_par LISTPARAM r_par BLQ 
             {
               SymAttributes RESULT =null;
+		int idleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-4)).left;
+		int idright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-4)).right;
+		Element id = (Element)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-4)).value;
+		int lleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)).left;
+		int lright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)).right;
+		SymAttributes l = (SymAttributes)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-2)).value;
+		int bleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
+		int bright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
+		SymAttributes b = (SymAttributes)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
+		
+if ((b.getType()=="error")||(l.getType()=="error")){
+RESULT=b; //propagamos el error
+}else{
+//propagamos el identificador de la función
+RESULT=new SymAttributes("", id.getLine(), id.getColumn(), id.getName());
+}
 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("RESTPART",9, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-4)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
@@ -380,6 +406,14 @@ RESULT=new SymAttributes("error", r.getRow(), r.getCol(), r.getName());
           case 5: // LISTPARAM ::= LISTPARAM comma TYPE tid 
             {
               SymAttributes RESULT =null;
+		int tleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)).left;
+		int tright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)).right;
+		Element t = (Element)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-1)).value;
+		int idleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
+		int idright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
+		Element id = (Element)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
+		
+//agregar a la tabla de símbolos del hijo, si no existe
 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("LISTPARAM",8, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-3)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
@@ -389,6 +423,14 @@ RESULT=new SymAttributes("error", r.getRow(), r.getCol(), r.getName());
           case 6: // LISTPARAM ::= TYPE tid 
             {
               SymAttributes RESULT =null;
+		int tleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)).left;
+		int tright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)).right;
+		Element t = (Element)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-1)).value;
+		int idleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
+		int idright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
+		Element id = (Element)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
+		
+//agregar a la tabla de símbolos del hijo
 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("LISTPARAM",8, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
@@ -410,6 +452,18 @@ RESULT=new SymAttributes("error", r.getRow(), r.getCol(), r.getName());
           case 8: // SENTLIST ::= SENTLIST SENT 
             {
               SymAttributes RESULT =null;
+		int lleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)).left;
+		int lright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)).right;
+		SymAttributes l = (SymAttributes)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-1)).value;
+		int sleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
+		int sright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
+		SymAttributes s = (SymAttributes)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
+		
+if ((l.getType()=="error")||(s.getType()=="error")){
+RESULT=new SymAttributes("error", s.getRow(), s.getCol(), s.getName());
+}else{
+RESULT=l;
+}
 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("SENTLIST",3, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
@@ -441,8 +495,7 @@ RESULT=new SymAttributes("error", r.getRow(), r.getCol(), r.getName());
 for (Element id:l){
 SymAttributes symAttributes = new SymAttributes(t.getName(), id.getLine(), id.getColumn(), id.getName());
 //declaración
-System.out.println(t.getName());
-	if (ScopeTree.getCurrentScope().getSymTable().addItem(id.getName(), symAttributes)){
+if (ScopeTree.getCurrentScope().getSymTable().addItem(id.getName(), symAttributes)){
 		RESULT = symAttributes;
 	}
 	else{
@@ -498,8 +551,24 @@ RESULT=new SymAttributes("error", symbol.getRow(), symbol.getCol(), symbol.getNa
           case 12: // SENT ::= tid l_par LID r_par semicolon 
             {
               SymAttributes RESULT =null;
+		int idleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-4)).left;
+		int idright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-4)).right;
+		Element id = (Element)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-4)).value;
 		
-//llamada a una función
+SymAttributes symbol=null;
+Scope scope=ScopeTree.getCurrentScope();
+while (scope.getParent()!=null){
+symbol=scope.getSymTable().getAttributes(id.getName());
+if (symbol!=null){
+break; // lo hemos encontrado!
+}
+}
+if (symbol==null){
+System.out.println("No se encuentra el símbolo "+id.getName()+" al que se hace referencia en línea "+id.getLine()+", columna "+id.getColumn());
+RESULT=new SymAttributes("error", id.getLine(), id.getColumn(), id.getName());
+}else{
+RESULT=new SymAttributes("", id.getLine(), id.getColumn(), id.getName());
+}
 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("SENT",4, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-4)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
@@ -509,8 +578,11 @@ RESULT=new SymAttributes("error", symbol.getRow(), symbol.getCol(), symbol.getNa
           case 13: // SENT ::= treturn EXP semicolon 
             {
               SymAttributes RESULT =null;
+		int eleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)).left;
+		int eright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)).right;
+		SymAttributes e = (SymAttributes)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-1)).value;
 		
-//retorno de una función
+RESULT=e;
 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("SENT",4, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
@@ -520,6 +592,21 @@ RESULT=new SymAttributes("error", symbol.getRow(), symbol.getCol(), symbol.getNa
           case 14: // SENT ::= tif l_par LCOND r_par tthen BLQ telse BLQ 
             {
               SymAttributes RESULT =null;
+		int lleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-5)).left;
+		int lright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-5)).right;
+		SymAttributes l = (SymAttributes)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-5)).value;
+		int b1left = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)).left;
+		int b1right = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)).right;
+		SymAttributes b1 = (SymAttributes)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-2)).value;
+		int b2left = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
+		int b2right = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
+		SymAttributes b2 = (SymAttributes)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
+		
+if ((l.getType()=="error")||(b1.getType()=="error")||(b2.getType()=="error")){
+RESULT=new SymAttributes("error", l.getRow(), l.getCol(), l.getName());
+}else{
+RESULT=new SymAttributes("", 0, 0, "");
+}
 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("SENT",4, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-7)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
@@ -529,6 +616,26 @@ RESULT=new SymAttributes("error", symbol.getRow(), symbol.getCol(), symbol.getNa
           case 15: // SENT ::= tfor l_par tid assig EXP semicolon LCOND semicolon tid assig EXP r_par BLQ 
             {
               SymAttributes RESULT =null;
+		int id1left = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-10)).left;
+		int id1right = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-10)).right;
+		Element id1 = (Element)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-10)).value;
+		int e1left = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-8)).left;
+		int e1right = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-8)).right;
+		SymAttributes e1 = (SymAttributes)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-8)).value;
+		int lleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-6)).left;
+		int lright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-6)).right;
+		SymAttributes l = (SymAttributes)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-6)).value;
+		int id2left = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-4)).left;
+		int id2right = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-4)).right;
+		Element id2 = (Element)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-4)).value;
+		int e2left = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)).left;
+		int e2right = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)).right;
+		SymAttributes e2 = (SymAttributes)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-2)).value;
+		int bleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
+		int bright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
+		SymAttributes b = (SymAttributes)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
+		
+
 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("SENT",4, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-12)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
@@ -559,6 +666,18 @@ RESULT=new SymAttributes("", 0, 0, "");
           case 17: // SENT ::= tdo BLQ tuntil l_par LCOND r_par 
             {
               SymAttributes RESULT =null;
+		int bleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-4)).left;
+		int bright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-4)).right;
+		SymAttributes b = (SymAttributes)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-4)).value;
+		int lleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)).left;
+		int lright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)).right;
+		SymAttributes l = (SymAttributes)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-1)).value;
+		
+if ((b.getType()=="error")||(l.getType()=="error")){
+RESULT=new SymAttributes("error", l.getRow(), l.getCol(), l.getName());
+}else{
+RESULT=new SymAttributes("", 0, 0, "");
+}
 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("SENT",4, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-5)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
@@ -762,7 +881,7 @@ RESULT=new SymAttributes("error", e.getRow(), e.getCol(), e.getName());
           case 30: // FACTOR ::= tid 
             {
               SymAttributes RESULT =null;
-		 RESULT = new SymAttributes("", scanner.getYyline(), scanner.getYycolumn(), scanner.yytext()); 
+		 //comprobar si existe 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("FACTOR",7, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;

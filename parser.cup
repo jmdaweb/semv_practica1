@@ -101,20 +101,33 @@ RESULT=r;
 ;
 
 RESTPART ::= tid:id l_par LISTPARAM:l r_par BLQ:b {:
-if (b.getType()=="error"){
+if ((b.getType()=="error")||(l.getType()=="error")){
 RESULT=b; //propagamos el error
+}else{
+//propagamos el identificador de la función
+RESULT=new SymAttributes("", id.getLine(), id.getColumn(), id.getName());
 }
 :}
 ;
 
-LISTPARAM ::= LISTPARAM comma TYPE tid 
-    | TYPE tid 
+LISTPARAM ::= LISTPARAM comma TYPE:t tid:id {:
+//agregar a la tabla de símbolos del hijo, si no existe
+:}
+    | TYPE:t tid:id {:
+//agregar a la tabla de símbolos del hijo
+:}
 ;
 
 BLQ ::= l_brace SENTLIST:s r_brace {: RESULT=s; :}
 ;
 
-SENTLIST ::= SENTLIST SENT 
+SENTLIST ::= SENTLIST:l SENT:s {:
+if ((l.getType()=="error")||(s.getType()=="error")){
+RESULT=new SymAttributes("error", s.getRow(), s.getCol(), s.getName());
+}else{
+RESULT=l;
+}
+:}
     | SENT:s {: RESULT=s; :}
 ;
 
@@ -122,8 +135,7 @@ SENT ::= TYPE:t LID:l semicolon  {:
 for (Element id:l){
 SymAttributes symAttributes = new SymAttributes(t.getName(), id.getLine(), id.getColumn(), id.getName());
 //declaración
-System.out.println(t.getName());
-	if (ScopeTree.getCurrentScope().getSymTable().addItem(id.getName(), symAttributes)){
+if (ScopeTree.getCurrentScope().getSymTable().addItem(id.getName(), symAttributes)){
 		RESULT = symAttributes;
 	}
 	else{
@@ -157,14 +169,35 @@ RESULT=new SymAttributes("error", symbol.getRow(), symbol.getCol(), symbol.getNa
 }
 }
 :}
-    | tid l_par LID r_par semicolon  {:
-//llamada a una función
+    | tid:id l_par LID r_par semicolon  {:
+SymAttributes symbol=null;
+Scope scope=ScopeTree.getCurrentScope();
+while (scope.getParent()!=null){
+symbol=scope.getSymTable().getAttributes(id.getName());
+if (symbol!=null){
+break; // lo hemos encontrado!
+}
+}
+if (symbol==null){
+System.out.println("No se encuentra el símbolo "+id.getName()+" al que se hace referencia en línea "+id.getLine()+", columna "+id.getColumn());
+RESULT=new SymAttributes("error", id.getLine(), id.getColumn(), id.getName());
+}else{
+RESULT=new SymAttributes("", id.getLine(), id.getColumn(), id.getName());
+}
 :}
-    | treturn EXP semicolon  {:
-//retorno de una función
+    | treturn EXP:e semicolon  {:
+RESULT=e;
 :}
-    | tif l_par LCOND r_par tthen BLQ telse BLQ 
-    | tfor l_par tid assig EXP semicolon LCOND semicolon tid assig EXP r_par BLQ 
+    | tif l_par LCOND:l r_par tthen BLQ:b1 telse BLQ:b2 {:
+if ((l.getType()=="error")||(b1.getType()=="error")||(b2.getType()=="error")){
+RESULT=new SymAttributes("error", l.getRow(), l.getCol(), l.getName());
+}else{
+RESULT=new SymAttributes("", 0, 0, "");
+}
+:}
+    | tfor l_par tid:id1 assig EXP:e1 semicolon LCOND:l semicolon tid:id2 assig EXP:e2 r_par BLQ:b {:
+
+:}
     | twhile l_par LCOND:l r_par BLQ:b {:
 if ((l.getType()=="error")||(b.getType()=="error")){
 RESULT=b;
@@ -172,7 +205,13 @@ RESULT=b;
 RESULT=new SymAttributes("", 0, 0, "");
 }
 :}
-    | tdo BLQ tuntil l_par LCOND r_par 
+    | tdo BLQ:b tuntil l_par LCOND:l r_par {:
+if ((b.getType()=="error")||(l.getType()=="error")){
+RESULT=new SymAttributes("error", l.getRow(), l.getCol(), l.getName());
+}else{
+RESULT=new SymAttributes("", 0, 0, "");
+}
+:}
     | BLQ:b {: RESULT=b; :}
 ;
 
@@ -237,7 +276,7 @@ RESULT=new SymAttributes("error", e.getRow(), e.getCol(), e.getName());
 
 FACTOR ::= tid l_par LID r_par 
     | l_bracket EXP:e r_bracket {: RESULT=e; :}
-    | tid {: RESULT = new SymAttributes("", scanner.getYyline(), scanner.getYycolumn(), scanner.yytext()); :}
+    | tid {: //comprobar si existe :}
     | constint  {: RESULT = new SymAttributes("", scanner.getYyline(), scanner.getYycolumn(), scanner.yytext()); :}
     | constfloat {: RESULT = new SymAttributes("", scanner.getYyline(), scanner.getYycolumn(), scanner.yytext()); :}
 ;
