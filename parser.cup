@@ -9,9 +9,39 @@ action code {:
 AnalizadorLexico scanner=(AnalizadorLexico)getScanner();
 :}
 // terminals
-terminal treturn, l_par, r_par, l_brace, r_brace, l_bracket, r_bracket, comma, semicolon;
-terminal assig, add, sub, mul, div, tif, tthen, telse, tfor, twhile, tdo, tuntil, tnot, tand, tor, equals;
-terminal less, greater, lessequal, greaterequal, include, hfile, constint, constfloat;
+terminal Element comma;
+terminal Element semicolon;
+terminal Element treturn;
+terminal Element l_par;
+terminal Element r_par;
+terminal Element l_brace;
+terminal Element r_brace;
+terminal Element l_bracket;
+terminal Element r_bracket;
+terminal equals;
+terminal Element assig;
+terminal Element add;
+terminal Element sub;
+terminal Element mul;
+terminal Element div;
+terminal Element tif;
+terminal Element tthen;
+terminal Element telse;
+terminal Element tfor;
+terminal Element twhile;
+terminal Element tdo;
+terminal Element tnot;
+terminal Element tuntil;
+terminal Element tand;
+terminal Element tor;
+terminal less;
+terminal greater;
+terminal lessequal;
+terminal greaterequal;
+terminal Element constint;
+terminal Element constfloat;
+terminal Element include;
+terminal Element hfile;
 terminal Element tvoid;
 terminal Element tint;
 terminal Element tfloat;
@@ -19,31 +49,73 @@ terminal Element tboolean;
 terminal Element tid;
 
 // non terminals
-non terminal PROGRAM, PART, BLQ, SENTLIST, SENT, EXP, EXPT, FACTOR, LISTPARAM, RESTPART,LCOND,LCONDT, LCONDF, COND,OPR;
+non terminal SymAttributes PROGRAM;
+non terminal SymAttributes PART;
+non terminal SymAttributes BLQ;
+non terminal SymAttributes SENTLIST;
+non terminal SymAttributes SENT;
+non terminal SymAttributes EXP;
+non terminal SymAttributes EXPT;
+non terminal SymAttributes FACTOR;
+non terminal SymAttributes LISTPARAM;
+non terminal SymAttributes RESTPART;
+non terminal SymAttributes LCOND;
+non terminal SymAttributes LCONDT;
+non terminal SymAttributes LCONDF;
+non terminal SymAttributes COND;
+non terminal OPR;
 non terminal ArrayList<Element> LID;
 non terminal Element TYPE;
 
 /* GRAMMAR */
 
-PROGRAM ::= PART PROGRAM 
-    | PART 
+PROGRAM ::= PART:p1 PROGRAM:p2 {:
+if ((p1.getType()=="error")||(p2.getType()=="error")){
+RESULT=new SymAttributes("error", p1.getRow(), p1.getCol(), p1.getName());
+}else{
+RESULT=p2;
+}
+:}
+    | PART:p {: RESULT=p; :}
 ;
 
-PART ::= TYPE RESTPART 
+PART ::= TYPE:t RESTPART:r {:
+//Esto es la definición de una función. Vamos a buscarla, y si ya existe, emitimos error.
+if (r.getType()==t.getName()){
+Scope scope=ScopeTree.getCurrentScope();
+if (scope.getSymTable().getAttributes(r.getName())==null){ //no existe, vamos a agregarlo
+scope.getSymTable().addItem(r.getName(), new SymAttributes(t.getName(), r.getRow(), r.getCol(), r.getName()));
+scope.addChild(new Scope(scope, r.getName()));
+RESULT=r;
+}else{ //no tiene error, pero existe
+System.out.println("Identificador de función duplicado. Línea "+r.getRow()+", columna "+r.getCol());
+RESULT=new SymAttributes("error", r.getRow(), r.getCol(), r.getName());
+}
+}else if (r.getType()=="error"){
+RESULT=r; //propagamos el error sin crear nada
+}else{
+System.out.println("El tipo de retorno de la función no coincide con el tipo declarado en su cabecera. Línea "+r.getRow()+", columna "+r.getCol());
+RESULT=r;
+}
+:}
 ;
 
-RESTPART ::= tid l_par LISTPARAM r_par BLQ 
+RESTPART ::= tid:id l_par LISTPARAM:l r_par BLQ:b {:
+if (b.getType()=="error"){
+RESULT=b; //propagamos el error
+}
+:}
 ;
 
 LISTPARAM ::= LISTPARAM comma TYPE tid 
     | TYPE tid 
 ;
 
-BLQ ::= l_brace SENTLIST r_brace 
+BLQ ::= l_brace SENTLIST:s r_brace {: RESULT=s; :}
 ;
 
 SENTLIST ::= SENTLIST SENT 
-    | SENT 
+    | SENT:s {: RESULT=s; :}
 ;
 
 SENT ::= TYPE:t LID:l semicolon  {:
@@ -55,14 +127,35 @@ System.out.println(t.getName());
 		RESULT = symAttributes;
 	}
 	else{
-		System.out.println("El s�mbolo " + id.getName() + " existe. Lin " + id.getLine() + " Col " + id.getColumn());
+		System.out.println("El símbolo " + id.getName() + " existe. Lin " + id.getLine() + " Col " + id.getColumn());
 		RESULT=new SymAttributes("error", -1, -1, "error");
 		break;
 	}
 }
 :}
     | tid:id assig EXP:exp semicolon  {:
-//asignación
+//asignación. Buscar en tabla, comprobar tipo, devolver error si no se encuentra o si tipos no coinciden
+SymAttributes symbol=null;
+Scope scope=ScopeTree.getCurrentScope();
+while (scope.getParent()!=null){
+symbol=scope.getSymTable().getAttributes(id.getName());
+if (symbol!=null){
+break; // lo hemos encontrado!
+}
+}
+if (symbol==null){
+System.out.println("No se encuentra el símbolo "+id.getName()+" al que se hace referencia en línea "+id.getLine()+", columna "+id.getColumn());
+RESULT=new SymAttributes("error", id.getLine(), id.getColumn(), id.getName());
+}else{
+if (symbol.getType()==exp.getType()){
+RESULT=exp;
+}else if((symbol.getType()=="error")||(exp.getType()=="error")){
+RESULT=new SymAttributes("error", symbol.getRow(), symbol.getCol(), symbol.getName());
+}else{
+System.out.println("No se puede asignar la expresión a la variable "+symbol.getName()+", línea "+symbol.getRow()+", columna "+symbol.getCol());
+RESULT=new SymAttributes("error", symbol.getRow(), symbol.getCol(), symbol.getName());
+}
+}
 :}
     | tid l_par LID r_par semicolon  {:
 //llamada a una función
@@ -72,9 +165,15 @@ System.out.println(t.getName());
 :}
     | tif l_par LCOND r_par tthen BLQ telse BLQ 
     | tfor l_par tid assig EXP semicolon LCOND semicolon tid assig EXP r_par BLQ 
-    | twhile l_par LCOND r_par BLQ 
+    | twhile l_par LCOND:l r_par BLQ:b {:
+if ((l.getType()=="error")||(b.getType()=="error")){
+RESULT=b;
+}else{
+RESULT=new SymAttributes("", 0, 0, "");
+}
+:}
     | tdo BLQ tuntil l_par LCOND r_par 
-    | BLQ 
+    | BLQ:b {: RESULT=b; :}
 ;
 
 LID ::= tid {:
@@ -90,21 +189,57 @@ RESULT=l;
     | /* empty */ 
 ;
 
-EXP ::= EXP add EXPT 
-    | EXP sub EXPT 
-    | EXPT  
+EXP ::= EXP:e1 add EXPT:e2 {:
+if (e1.getType()==e2.getType()){
+RESULT=e1;
+}else if((e1.getType()=="error")||(e2.getType()=="error")){
+RESULT=new SymAttributes("error", e1.getRow(), e1.getCol(), e1.getName());
+}else{
+System.out.println("El tipo de los operandos de la suma no coincide. Línea "+e1.getRow()+", columna "+e1.getCol());
+RESULT=new SymAttributes("error", e1.getRow(), e1.getCol(), e1.getName());
+}
+:}
+    | EXP:e1 sub EXPT:e2 {:
+if (e1.getType()==e2.getType()){
+RESULT=e1;
+}else if((e1.getType()=="error")||(e2.getType()=="error")){
+RESULT=new SymAttributes("error", e1.getRow(), e1.getCol(), e1.getName());
+}else{
+System.out.println("El tipo de los operandos de la resta no coincide. Línea "+e1.getRow()+", columna "+e1.getCol());
+RESULT=new SymAttributes("error", e1.getRow(), e1.getCol(), e1.getName());
+}
+:}
+    | EXPT:e  {: RESULT=e; :}
 ;
 
-EXPT ::= EXPT mul FACTOR 
-    | EXPT div FACTOR 
-    | FACTOR 
+EXPT ::= EXPT:e mul FACTOR:f {:
+if (e.getType()==f.getType()){
+RESULT=e;
+}else if((e.getType()=="error")||(f.getType()=="error")){
+RESULT=new SymAttributes("error", e.getRow(), e.getCol(), e.getName());
+}else{
+System.out.println("El tipo de los operandos de la multiplicación no coincide. Línea "+e.getRow()+", columna "+e.getCol());
+RESULT=new SymAttributes("error", e.getRow(), e.getCol(), e.getName());
+}
+:}
+    | EXPT:e div FACTOR:f {:
+if (e.getType()==f.getType()){
+RESULT=e;
+}else if((e.getType()=="error")||(f.getType()=="error")){
+RESULT=new SymAttributes("error", e.getRow(), e.getCol(), e.getName());
+}else{
+System.out.println("El tipo de los operandos de la división no coincide. Línea "+e.getRow()+", columna "+e.getCol());
+RESULT=new SymAttributes("error", e.getRow(), e.getCol(), e.getName());
+}
+:}
+    | FACTOR:f {: RESULT=f; :}
 ;
 
 FACTOR ::= tid l_par LID r_par 
-    | l_bracket EXP r_bracket 
-    | tid 
-    | constint  
-    | constfloat 
+    | l_bracket EXP:e r_bracket {: RESULT=e; :}
+    | tid {: RESULT = new SymAttributes("", scanner.getYyline(), scanner.getYycolumn(), scanner.yytext()); :}
+    | constint  {: RESULT = new SymAttributes("", scanner.getYyline(), scanner.getYycolumn(), scanner.yytext()); :}
+    | constfloat {: RESULT = new SymAttributes("", scanner.getYyline(), scanner.getYycolumn(), scanner.yytext()); :}
 ;
 
 TYPE ::= tvoid {: RESULT = new Element(scanner.yytext(), scanner.getYyline(), scanner.getYycolumn()); :}
@@ -112,19 +247,46 @@ TYPE ::= tvoid {: RESULT = new Element(scanner.yytext(), scanner.getYyline(), sc
     | tfloat {: RESULT = new Element(scanner.yytext(), scanner.getYyline(), scanner.getYycolumn()); :}
 ;
 
-LCOND::= LCOND tor LCONDT 
-        | LCONDT 
+LCOND::= LCOND:d tor LCONDT:t {:
+if (d.getType()==t.getType()){
+RESULT=d;
+}else if((d.getType()=="error"||t.getType()=="error")){
+RESULT=new SymAttributes("error", d.getRow(), d.getCol(), d.getName());
+}else{
+System.out.println("Los operandos no son compatibles con el operador or. Línea "+d.getRow()+", columna "+d.getCol());
+RESULT=new SymAttributes("error", d.getRow(), d.getCol(), d.getName());
+}
+:}
+        | LCONDT:t {: RESULT=t; :}
 ;
 
-LCONDT::= LCONDT tand LCONDF 
-        |LCONDF 
+LCONDT::= LCONDT:t tand LCONDF:f {:
+if (t.getType()==f.getType()){
+RESULT=t;
+}else if((t.getType()=="error")||(f.getType()=="error")){
+RESULT=new SymAttributes("error", t.getRow(), t.getCol(), t.getName());
+}else{
+System.out.println("Los operandos no son compatibles con el operador and. Línea "+t.getRow()+", columna "+t.getCol());
+RESULT=new SymAttributes("error", t.getRow(), t.getCol(), t.getName());
+}
+:}
+        |LCONDF:l {: RESULT=l; :}
 ;
 
-LCONDF ::= COND 
-        | tnot COND 
+LCONDF ::= COND:c {: RESULT=c; :}
+        | tnot COND:c {: RESULT=c; :}
 ;
 
-COND ::= EXP OPR EXP 
+COND ::= EXP:e1 OPR EXP:e2 {:
+if (e1.getType()==e2.getType()){
+RESULT=e1;
+}else if((e1.getType()=="error")||(e2.getType()=="error")){
+RESULT=new SymAttributes("error", e1.getRow(), e1.getCol(), e1.getName());
+}else{
+System.out.println("No se pueden comparar 2 elementos de distinto tipo. Línea "+e1.getRow()+", columna "+e1.getCol());
+RESULT=new SymAttributes("error", e1.getRow(), e1.getCol(), e1.getName());
+}
+:}
 ;
 
 OPR::=  equals 
