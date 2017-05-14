@@ -36,12 +36,13 @@ terminal lessequal;
 terminal greaterequal;
 terminal Element constint;
 terminal Element constfloat;
+terminal Element constbool;
 terminal include;
 terminal Element hfile;
 terminal Element tvoid;
 terminal Element tint;
 terminal Element tfloat;
-terminal Element tboolean;
+terminal Element tbool;
 terminal Element tid;
 
 // non terminals
@@ -60,12 +61,13 @@ non terminal SymAttributes LCONDT;
 non terminal SymAttributes LCONDF;
 non terminal SymAttributes COND;
 non terminal OPR;
-non terminal SymAttributes LID;
+non terminal ArrayList<Element> LID;
 non terminal Element TYPE;
 
 /* GRAMMAR */
 
-PROGRAM ::= PART:p1 PROGRAM:p2 {:
+PROGRAM ::= include hfile PROGRAM
+    | PART:p1 PROGRAM:p2 {:
 if ((p1.getType()=="error")||(p2.getType()=="error")){
 RESULT=new SymAttributes("error", p1.getRow(), p1.getCol(), p1.getName());
 }else{
@@ -274,11 +276,13 @@ FACTOR ::= tid l_par LID r_par
     | tid {: //comprobar si existe :}
     | constint:c  {: RESULT = new SymAttributes("int", c.getLine(), c.getColumn(), c.getName()); :}
     | constfloat:c {: RESULT = new SymAttributes("float", c.getLine(), c.getColumn(), c.getName()); :}
+    | constbool:c {: RESULT = new SymAttributes("bool", c.getLine(), c.getColumn(), c.getName()); :}
 ;
 
 TYPE ::= tvoid:t {: RESULT = t; :}
     | tint:t {: RESULT = t; :}
     | tfloat:t {: RESULT = t; :}
+    | tbool:t {: RESULT=t; :}
 ;
 
 LCOND::= LCOND:d tor LCONDT:t {:
