@@ -192,7 +192,18 @@ RESULT=new SymAttributes("", 0, 0, "");
 }
 :}
     | tfor l_par tid:id1 assig EXP:e1 semicolon LCOND:l semicolon tid:id2 assig EXP:e2 r_par BLQ:b {:
-
+if (e1.getType()=="error") {
+RESULT=new SymAttributes("error", e1.getRow(), e1.getCol(), e1.getName());
+}
+else if (l.getType()=="error") {
+RESULT=new SymAttributes("error", l.getRow(), l.getCol(), l.getName());
+}
+else if (e2.getType()=="error") {
+RESULT=new SymAttributes("error", e2.getRow(), e2.getCol(), e2.getName());
+}
+else {
+RESULT=new SymAttributes("", 0, 0, "");
+}
 :}
     | twhile l_par LCOND:l r_par BLQ:b {:
 if ((l.getType()=="error")||(b.getType()=="error")){
