@@ -9,12 +9,13 @@ public class Scope {
 	private Scope parent;
 	private List<Scope> children;
 	private String name;
-
-	public Scope (Scope parent, String name) {
+	private String type;
+	public Scope (Scope parent, String name, String type) {
 		this.symTable = new SymTable();
 		this.parent = parent;
 		this.children = new ArrayList<Scope>();
 		this.name=name;
+		this.type=type;
 	}
 	
 	/*public Scope (SymTable symTable) {
@@ -47,5 +48,8 @@ public class Scope {
 	}
 	public SymTable getSymTable(){
 		return this.symTable;
+	}
+	public String getType(){
+		return type;
 	}
 }

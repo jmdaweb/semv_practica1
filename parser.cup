@@ -78,22 +78,16 @@ RESULT=p2;
 ;
 
 PART ::= TYPE:t RESTPART:r {:
-//Esto es la definición de una función. Vamos a buscarla, y si ya existe, emitimos error.
-if (r.getType()==t.getName()){
 Scope scope=ScopeTree.getCurrentScope();
-if (scope.getSymTable().getAttributes(r.getName())==null){ //no existe, vamos a agregarlo
-scope.getSymTable().addItem(r.getName(), new SymAttributes(t.getName(), r.getRow(), r.getCol(), r.getName()));
-scope.addChild(new Scope(scope, r.getName()));
+if (scope.getSymTable().addItem(r.getName(), new SymAttributes(t.getName(), r.getRow(), r.getCol(), r.getName()))){
+Scope child=new Scope(scope, r.getName(), t.getName());
+scope.addChild(child);
 RESULT=r;
-}else{ //no tiene error, pero existe
+ScopeTree.setCurrentScope(child);
+child.getSymTable().addItem(r.getName(), r);
+}else{
 System.out.println("Identificador de función duplicado. Línea "+r.getRow()+", columna "+r.getCol());
 RESULT=new SymAttributes("error", r.getRow(), r.getCol(), r.getName());
-}
-}else if (r.getType()=="error"){
-RESULT=r; //propagamos el error sin crear nada
-}else{
-System.out.println("El tipo de retorno de la función no coincide con el tipo declarado en su cabecera. Línea "+r.getRow()+", columna "+r.getCol());
-RESULT=r;
 }
 :}
 ;
@@ -102,17 +96,29 @@ RESTPART ::= tid:id l_par LISTPARAM:l r_par BLQ:b {:
 if ((b.getType()=="error")||(l.getType()=="error")){
 RESULT=b; //propagamos el error
 }else{
-//propagamos el identificador de la función
 RESULT=new SymAttributes("", id.getLine(), id.getColumn(), id.getName());
 }
 :}
 ;
 
-LISTPARAM ::= LISTPARAM comma TYPE:t tid:id {:
-//agregar a la tabla de símbolos del hijo, si no existe
+LISTPARAM ::= LISTPARAM:l comma TYPE:t tid:id {:
+if (l.getType()=="error"){
+RESULT=l; //propagamos
+}else{
+SymAttributes symbol=new SymAttributes(t.getName(), id.getLine(), id.getColumn(), id.getName());
+if (ScopeTree.getCurrentScope().getSymTable().addItem(symbol.getName(), symbol)){
+RESULT=symbol;
+}else{
+System.out.println("Identificador repetido en la cabecera de la función. Línea "+symbol.getRow()+", columna "+symbol.getCol());
+RESULT=new SymAttributes("error", symbol.getRow(), symbol.getCol(), symbol.getName());
+}
+}
 :}
     | TYPE:t tid:id {:
-//agregar a la tabla de símbolos del hijo
+//podemos agregar este símbolo sin comprobar errores, es el primer o el único argumento de la función
+SymAttributes symbol=new SymAttributes(t.getName(), id.getLine(), id.getColumn(), id.getName());
+ScopeTree.getCurrentScope().getSymTable().addItem(symbol.getName(), symbol);
+RESULT=symbol;
 :}
 ;
 
@@ -132,7 +138,6 @@ RESULT=l;
 SENT ::= TYPE:t LID:l semicolon  {:
 for (Element id:l){
 SymAttributes symAttributes = new SymAttributes(t.getName(), id.getLine(), id.getColumn(), id.getName());
-//declaración
 if (ScopeTree.getCurrentScope().getSymTable().addItem(id.getName(), symAttributes)){
 		RESULT = symAttributes;
 	}
@@ -144,7 +149,6 @@ if (ScopeTree.getCurrentScope().getSymTable().addItem(id.getName(), symAttribute
 }
 :}
     | tid:id assig EXP:exp semicolon  {:
-//asignación. Buscar en tabla, comprobar tipo, devolver error si no se encuentra o si tipos no coinciden
 SymAttributes symbol=null;
 Scope scope=ScopeTree.getCurrentScope();
 while (scope.getParent()!=null){
@@ -180,11 +184,16 @@ if (symbol==null){
 System.out.println("No se encuentra el símbolo "+id.getName()+" al que se hace referencia en línea "+id.getLine()+", columna "+id.getColumn());
 RESULT=new SymAttributes("error", id.getLine(), id.getColumn(), id.getName());
 }else{
-RESULT=new SymAttributes("", id.getLine(), id.getColumn(), id.getName());
+RESULT=new SymAttributes(symbol.getType(), id.getLine(), id.getColumn(), id.getName());
 }
 :}
     | treturn EXP:e semicolon  {:
+if ((ScopeTree.getCurrentScope().getType()==e.getType())||(e.getType()=="error")){
 RESULT=e;
+}else{
+System.out.println("La sentencia return no devuelve un valor del tipo esperado. Línea "+e.getRow()+", columna "+e.getCol());
+RESULT=new SymAttributes("error", e.getRow(), e.getCol(), e.getName());
+}
 :}
     | tif l_par LCOND:l r_par tthen BLQ:b1 telse BLQ:b2 {:
 if ((l.getType()=="error")||(b1.getType()=="error")||(b2.getType()=="error")){
@@ -203,8 +212,34 @@ RESULT=new SymAttributes("error", l.getRow(), l.getCol(), l.getName());
 else if (e2.getType()=="error") {
 RESULT=new SymAttributes("error", e2.getRow(), e2.getCol(), e2.getName());
 }
+else if(b.getType()=="error"){
+RESULT=new SymAttributes("error", b.getRow(), b.getCol(), b.getName());
+}
 else {
+//no hay errores en las expresiones, vamos a ver si existen los símbolos
+SymAttributes symbol1=null;
+SymAttributes symbol2=null;
+Scope scope=ScopeTree.getCurrentScope();
+while (scope.getParent()!=null){
+if (symbol1==null){
+symbol1=scope.getSymTable().getAttributes(id1.getName());
+}
+if (symbol2==null){
+symbol2=scope.getSymTable().getAttributes(id2.getName());
+}
+if ((symbol1!=null)&&(symbol2!=null)){
+break; // hemos encontrado los 2
+}
+}
+if (symbol1==null){
+System.out.println("No se encuentra el símbolo "+id1.getName()+" al que se hace referencia en línea "+id1.getLine()+", columna "+id1.getColumn());
+RESULT=new SymAttributes("error", id1.getLine(), id1.getColumn(), id1.getName());
+}else if(symbol2==null){
+System.out.println("No se encuentra el símbolo "+id2.getName()+" al que se hace referencia en línea "+id2.getLine()+", columna "+id2.getColumn());
+RESULT=new SymAttributes("error", id2.getLine(), id2.getColumn(), id2.getName());
+}else{
 RESULT=new SymAttributes("", 0, 0, "");
+}
 }
 :}
     | twhile l_par LCOND:l r_par BLQ:b {:
