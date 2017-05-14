@@ -1,12 +1,15 @@
 package com.semv.practica1.symbols_table;
 
-public class Element {
+import java_cup.runtime.Symbol;
+
+public class Element extends Symbol{
 	
 	private String name;
 	private int line;
 	private int column;
 	
-	public Element (String name, int line, int column) {
+	public Element (String name, int line, int column, int value) {
+		super(value);
 		this.name = name;
 		this.line = line;
 		this.column = column;

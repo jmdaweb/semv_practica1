@@ -8,30 +8,30 @@ package com.semv.practica1.syntactic;
 /** CUP generated class containing symbol constants. */
 public class sym {
   /* terminals */
-  public static final int include = 33;
+  public static final int include = 34;
   public static final int mul = 15;
   public static final int l_bracket = 9;
-  public static final int tboolean = 38;
   public static final int add = 13;
   public static final int tor = 26;
   public static final int greaterequal = 30;
   public static final int tuntil = 24;
   public static final int treturn = 4;
   public static final int tif = 17;
-  public static final int tid = 39;
+  public static final int tid = 40;
   public static final int comma = 2;
+  public static final int tbool = 39;
   public static final int constfloat = 32;
-  public static final int tint = 36;
+  public static final int tint = 37;
   public static final int tfor = 20;
   public static final int tnot = 23;
   public static final int tand = 25;
   public static final int sub = 14;
   public static final int EOF = 0;
-  public static final int tvoid = 35;
+  public static final int tvoid = 36;
   public static final int twhile = 21;
   public static final int error = 1;
   public static final int equals = 11;
-  public static final int tfloat = 37;
+  public static final int tfloat = 38;
   public static final int telse = 19;
   public static final int l_par = 5;
   public static final int r_bracket = 10;
@@ -40,11 +40,12 @@ public class sym {
   public static final int greater = 28;
   public static final int r_brace = 8;
   public static final int tthen = 18;
+  public static final int constbool = 33;
   public static final int tdo = 22;
   public static final int less = 27;
   public static final int div = 16;
+  public static final int hfile = 35;
   public static final int semicolon = 3;
-  public static final int hfile = 34;
   public static final int lessequal = 29;
   public static final int r_par = 6;
   public static final int assig = 12;
@@ -82,12 +83,13 @@ public class sym {
   "greaterequal",
   "constint",
   "constfloat",
+  "constbool",
   "include",
   "hfile",
   "tvoid",
   "tint",
   "tfloat",
-  "tboolean",
+  "tbool",
   "tid"
   };
 }
