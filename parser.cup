@@ -78,18 +78,25 @@ RESULT=p2;
     | PART:p {: RESULT=p; :}
 ;
 
-PART ::= TYPE:t RESTPART:r {:
-System.out.println("Definimos type y restpart");
+PART ::= TYPE:t {:
+Scope scope=new Scope(ScopeTree.getCurrentScope(), "", t.getName());
+ScopeTree.getCurrentScope().addChild(scope);
+ScopeTree.setCurrentScope(scope);
+:}
+RESTPART:r {:
 Scope scope=ScopeTree.getCurrentScope();
-if (scope.getSymTable().addItem(r.getName(), new SymAttributes(t.getName(), r.getRow(), r.getCol(), r.getName()))){
-Scope child=new Scope(scope, r.getName(), t.getName());
-scope.addChild(child);
+if (scope.getParent().getSymTable().addItem(r.getName(), new SymAttributes(t.getName(), r.getRow(), r.getCol(), r.getName()))){
+scope.getSymTable().addItem(r.getName(), new SymAttributes(t.getName(), r.getRow(), r.getCol(), r.getName())); //agregamos la función también al hijo
+scope.setName(r.getName());
 RESULT=r;
-//ScopeTree.setCurrentScope(child);
-child.getSymTable().addItem(r.getName(), r);
 }else{
 System.out.println("Identificador de función duplicado. Línea "+r.getRow()+", columna "+r.getCol());
 RESULT=new SymAttributes("error", r.getRow(), r.getCol(), r.getName());
+}
+if (ScopeTree.getCurrentScope().getName()!="main"){
+ScopeTree.setCurrentScope(ScopeTree.getCurrentScope().getParent());
+}else{
+ScopeTree.getRoot().setSymTable(scope.getSymTable());
 }
 :}
 ;

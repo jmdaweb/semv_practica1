@@ -52,4 +52,14 @@ public class Scope {
 	public String getType(){
 		return type;
 	}
+
+	public void setName(String name) {
+		// TODO Auto-generated method stub
+		this.name=name;
+	}
+
+	public void setSymTable(SymTable symTable) {
+		// TODO Auto-generated method stub
+		this.symTable=symTable;
+	}
 }
