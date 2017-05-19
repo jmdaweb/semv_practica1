@@ -5,6 +5,7 @@ import java.io.IOException;
 import com.semv.practica1.exceptions.InvalidFileException;
 import com.semv.practica1.files.FileAnalyzer;
 import com.semv.practica1.lexer.*;
+import com.semv.practica1.symbols_table.ScopeTree;
 import com.semv.practica1.syntactic.parser;
 
 public class Practica1 {
@@ -38,6 +39,7 @@ public class Practica1 {
 	}
 	
 	public static void main (String[] argv) throws IOException {
+		ScopeTree.initialize();
 		//if (argv.length==1) {
 			//readFile(argv[0]);
 		//}
