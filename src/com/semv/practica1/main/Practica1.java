@@ -38,12 +38,13 @@ public class Practica1 {
 	}
 	
 	public static void main (String[] argv) throws IOException {
-		if (argv.length==1) {
-			readFile(argv[0]);
-		}
-		else {
-			showHelp();
-		}
+		//if (argv.length==1) {
+			//readFile(argv[0]);
+		//}
+		//else {
+			//showHelp();
+		//}
+		readFile("ejemplo.c");
 	}
 
 }

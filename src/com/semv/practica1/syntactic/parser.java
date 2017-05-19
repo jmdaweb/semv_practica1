@@ -344,7 +344,6 @@ class CUP$parser$actions {
 		int p2right = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		SymAttributes p2 = (SymAttributes)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
 		
-System.out.println("Un part se agrega a un program");
 if ((p1.getType()=="error")||(p2.getType()=="error")){
 RESULT=new SymAttributes("error", p1.getRow(), p1.getCol(), p1.getName());
 }else{
@@ -405,11 +404,11 @@ RESULT=r;
 System.out.println("Identificador de función duplicado. Línea "+r.getRow()+", columna "+r.getCol());
 RESULT=new SymAttributes("error", r.getRow(), r.getCol(), r.getName());
 }
-if (ScopeTree.getCurrentScope().getName()!="main"){
-ScopeTree.setCurrentScope(ScopeTree.getCurrentScope().getParent());
-}else{
+if ((ScopeTree.getCurrentScope().getName()=="main")&&(ScopeTree.getCurrentScope().getParent()==ScopeTree.getRoot())){
 ScopeTree.getRoot().setSymTable(scope.getSymTable());
+scope.getParent().removeChild(scope);
 }
+ScopeTree.setCurrentScope(scope.getParent());
 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("PART",1, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
@@ -429,15 +428,10 @@ ScopeTree.getRoot().setSymTable(scope.getSymTable());
 		int bright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		SymAttributes b = (SymAttributes)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
 		
-System.out.println("Cabecera y cuerpo de función");
 if ((b.getType()=="error")||(l.getType()=="error")){
 RESULT=b; //propagamos el error
 }else{
 RESULT=new SymAttributes("", id.getLine(), id.getColumn(), id.getName());
-//if (ScopeTree.getCurrentScope().getParent()!=null){
-//termina la función, subimos al nivel superior
-//ScopeTree.setCurrentScope(ScopeTree.getCurrentScope().getParent());
-//}
 }
 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("RESTPART",9, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-4)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
@@ -458,7 +452,6 @@ RESULT=new SymAttributes("", id.getLine(), id.getColumn(), id.getName());
 		int idright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		Element id = (Element)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
 		
-System.out.println("Lista de argumentos");
 if (l.getType()=="error"){
 RESULT=l; //propagamos
 }else{
@@ -486,8 +479,6 @@ RESULT=new SymAttributes("error", symbol.getRow(), symbol.getCol(), symbol.getNa
 		int idright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		Element id = (Element)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
 		
-System.out.println("Lista de un solo argumento");
-//podemos agregar este símbolo sin comprobar errores, es el primer o el único argumento de la función
 SymAttributes symbol=new SymAttributes(t.getName(), id.getLine(), id.getColumn(), id.getName());
 ScopeTree.getCurrentScope().getSymTable().addItem(symbol.getName(), symbol);
 RESULT=symbol;
@@ -504,7 +495,6 @@ RESULT=symbol;
 		int sright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)).right;
 		SymAttributes s = (SymAttributes)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-1)).value;
 		 
-System.out.println("Definimos bloque");
 RESULT=s; 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("BLQ",2, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
@@ -588,6 +578,7 @@ symbol=scope.getSymTable().getAttributes(id.getName());
 if (symbol!=null){
 break; // lo hemos encontrado!
 }
+scope=scope.getParent();
 }
 if (symbol==null){
 System.out.println("No se encuentra el símbolo "+id.getName()+" al que se hace referencia en línea "+id.getLine()+", columna "+id.getColumn());
@@ -622,6 +613,7 @@ symbol=scope.getSymTable().getAttributes(id.getName());
 if (symbol!=null){
 break; // lo hemos encontrado!
 }
+scope=scope.getParent();
 }
 if (symbol==null){
 System.out.println("No se encuentra el símbolo "+id.getName()+" al que se hace referencia en línea "+id.getLine()+", columna "+id.getColumn());
@@ -727,6 +719,7 @@ symbol2=scope.getSymTable().getAttributes(id2.getName());
 if ((symbol1!=null)&&(symbol2!=null)){
 break; // hemos encontrado los 2
 }
+scope=scope.getParent();
 }
 if (symbol1==null){
 System.out.println("No se encuentra el símbolo "+id1.getName()+" al que se hace referencia en línea "+id1.getLine()+", columna "+id1.getColumn());
@@ -754,7 +747,9 @@ RESULT=new SymAttributes("", 0, 0, "");
 		int bright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		SymAttributes b = (SymAttributes)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
 		
-if ((l.getType()=="error")||(b.getType()=="error")){
+if (l.getType()=="error"){
+RESULT=l;
+}else if (b.getType()=="error"){
 RESULT=b;
 }else{
 RESULT=new SymAttributes("", 0, 0, "");
@@ -964,6 +959,25 @@ RESULT=new SymAttributes("error", e.getRow(), e.getCol(), e.getName());
           case 30: // FACTOR ::= tid l_par LID r_par 
             {
               SymAttributes RESULT =null;
+		int idleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-3)).left;
+		int idright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-3)).right;
+		Element id = (Element)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-3)).value;
+		 
+Scope scope=ScopeTree.getCurrentScope();
+SymAttributes symbol=null;
+while (scope.getParent()!=null){
+symbol=scope.getSymTable().getAttributes(id.getName());
+if (symbol!=null){
+break; // lo hemos encontrado!
+}
+scope=scope.getParent();
+}
+if (symbol==null){
+System.out.println("No se encuentra el símbolo especificado. Línea "+id.getLine()+", columna "+id.getColumn());
+RESULT=new SymAttributes("error", id.getLine(), id.getColumn(), id.getName());
+}else{
+RESULT=new SymAttributes(symbol.getType(), id.getLine(), id.getColumn(), id.getName());
+}
 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("FACTOR",7, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-3)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
@@ -985,7 +999,26 @@ RESULT=new SymAttributes("error", e.getRow(), e.getCol(), e.getName());
           case 32: // FACTOR ::= tid 
             {
               SymAttributes RESULT =null;
-		 //comprobar si existe 
+		int idleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
+		int idright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
+		Element id = (Element)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
+		 
+Scope scope=ScopeTree.getCurrentScope();
+SymAttributes symbol=null;
+while (scope.getParent()!=null){
+symbol=scope.getSymTable().getAttributes(id.getName());
+if (symbol!=null){
+break; // lo hemos encontrado!
+}
+scope=scope.getParent();
+}
+if (symbol==null){
+System.out.println("No se encuentra el símbolo especificado. Línea "+id.getLine()+", columna "+id.getColumn());
+RESULT=new SymAttributes("error", id.getLine(), id.getColumn(), id.getName());
+}else{
+RESULT=new SymAttributes(symbol.getType(), id.getLine(), id.getColumn(), id.getName());
+}
+ 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("FACTOR",7, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
