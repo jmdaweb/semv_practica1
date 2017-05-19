@@ -342,6 +342,7 @@ class CUP$parser$actions {
 		int p2right = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		SymAttributes p2 = (SymAttributes)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
 		
+System.out.println("Un part se agrega a un program");
 if ((p1.getType()=="error")||(p2.getType()=="error")){
 RESULT=new SymAttributes("error", p1.getRow(), p1.getCol(), p1.getName());
 }else{
@@ -375,12 +376,13 @@ RESULT=p2;
 		int rright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		SymAttributes r = (SymAttributes)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
 		
+System.out.println("Definimos type y restpart");
 Scope scope=ScopeTree.getCurrentScope();
 if (scope.getSymTable().addItem(r.getName(), new SymAttributes(t.getName(), r.getRow(), r.getCol(), r.getName()))){
 Scope child=new Scope(scope, r.getName(), t.getName());
 scope.addChild(child);
 RESULT=r;
-ScopeTree.setCurrentScope(child);
+//ScopeTree.setCurrentScope(child);
 child.getSymTable().addItem(r.getName(), r);
 }else{
 System.out.println("Identificador de función duplicado. Línea "+r.getRow()+", columna "+r.getCol());
@@ -405,10 +407,15 @@ RESULT=new SymAttributes("error", r.getRow(), r.getCol(), r.getName());
 		int bright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		SymAttributes b = (SymAttributes)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
 		
+System.out.println("Cabecera y cuerpo de función");
 if ((b.getType()=="error")||(l.getType()=="error")){
 RESULT=b; //propagamos el error
 }else{
 RESULT=new SymAttributes("", id.getLine(), id.getColumn(), id.getName());
+//if (ScopeTree.getCurrentScope().getParent()!=null){
+//termina la función, subimos al nivel superior
+//ScopeTree.setCurrentScope(ScopeTree.getCurrentScope().getParent());
+//}
 }
 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("RESTPART",9, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-4)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
@@ -429,6 +436,7 @@ RESULT=new SymAttributes("", id.getLine(), id.getColumn(), id.getName());
 		int idright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		Element id = (Element)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
 		
+System.out.println("Lista de argumentos");
 if (l.getType()=="error"){
 RESULT=l; //propagamos
 }else{
@@ -456,6 +464,7 @@ RESULT=new SymAttributes("error", symbol.getRow(), symbol.getCol(), symbol.getNa
 		int idright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		Element id = (Element)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
 		
+System.out.println("Lista de un solo argumento");
 //podemos agregar este símbolo sin comprobar errores, es el primer o el único argumento de la función
 SymAttributes symbol=new SymAttributes(t.getName(), id.getLine(), id.getColumn(), id.getName());
 ScopeTree.getCurrentScope().getSymTable().addItem(symbol.getName(), symbol);
@@ -472,7 +481,9 @@ RESULT=symbol;
 		int sleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)).left;
 		int sright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)).right;
 		SymAttributes s = (SymAttributes)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-1)).value;
-		 RESULT=s; 
+		 
+System.out.println("Definimos bloque");
+RESULT=s; 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("BLQ",2, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
