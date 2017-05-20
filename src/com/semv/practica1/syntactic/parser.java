@@ -1219,7 +1219,7 @@ RESULT=e1;
 }else if((e1.getType()=="error")||(e2.getType()=="error")){
 RESULT=new SymAttributes("error", e1.getRow(), e1.getCol(), e1.getName());
 }else{
-System.out.println("No se pueden comparar 2 elementos de distinto tipo. Línea "+e1.getRow()+", columna "+e1.getCol());
+System.out.println("No se pueden comparar 2 elementos de distinto tipo. Línea "+e1.getRow()+", columna "+e1.getCol()+". El primero es de tipo "+e1.getType()+", y el segundo es "+e2.getType());
 RESULT=new SymAttributes("error", e1.getRow(), e1.getCol(), e1.getName());
 }
 

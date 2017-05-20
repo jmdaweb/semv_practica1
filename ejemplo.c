@@ -1,8 +1,8 @@
 int factorial(int num){
-if (num==1){
+if (num==1) then {
 return num;
 }else{
-return num*factorial(num-1);
+return num*factorial(num);
 }
 }
 void main(int argc){
