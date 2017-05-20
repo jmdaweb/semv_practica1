@@ -344,7 +344,7 @@ class CUP$parser$actions {
 		int p2right = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		SymAttributes p2 = (SymAttributes)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
 		
-if ((p1.getType()=="error")||(p2.getType()=="error")){
+if ((p1.getType().equals("error"))||(p2.getType().equals("error"))){
 RESULT=new SymAttributes("error", p1.getRow(), p1.getCol(), p1.getName());
 }else{
 RESULT=p2;
@@ -406,7 +406,7 @@ RESULT=r;
 System.out.println("Identificador de función duplicado. Línea "+r.getRow()+", columna "+r.getCol());
 RESULT=new SymAttributes("error", r.getRow(), r.getCol(), r.getName());
 }
-if ((ScopeTree.getCurrentScope().getName()=="main")&&(ScopeTree.getCurrentScope().getParent()==ScopeTree.getRoot())){
+if ((ScopeTree.getCurrentScope().getName().equals("main"))&&(ScopeTree.getCurrentScope().getParent()==ScopeTree.getRoot())){
 ScopeTree.getRoot().setSymTable(scope.getSymTable());
 scope.getParent().removeChild(scope);
 scope.getParent().setType(t.getName());
@@ -432,7 +432,7 @@ ScopeTree.setCurrentScope(scope.getParent());
 		int bright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		SymAttributes b = (SymAttributes)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
 		
-if ((b.getType()=="error")||(l.getType()=="error")){
+if ((b.getType().equals("error"))||(l.getType().equals("error"))){
 RESULT=b; //propagamos el error
 }else{
 RESULT=new SymAttributes("", id.getLine(), id.getColumn(), id.getName());
@@ -456,7 +456,7 @@ RESULT=new SymAttributes("", id.getLine(), id.getColumn(), id.getName());
 		int idright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		Element id = (Element)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
 		
-if (l.getType()=="error"){
+if (l.getType().equals("error")){
 RESULT=l; //propagamos
 }else{
 SymAttributes symbol=new SymAttributes(t.getName(), id.getLine(), id.getColumn(), id.getName());
@@ -515,7 +515,7 @@ RESULT=s;
 		int sright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		SymAttributes s = (SymAttributes)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
 		
-if ((l.getType()=="error")||(s.getType()=="error")){
+if ((l.getType().equals("error"))||(s.getType().equals("error"))){
 RESULT=new SymAttributes("error", s.getRow(), s.getCol(), s.getName());
 }else{
 RESULT=l;
@@ -588,9 +588,9 @@ if (symbol==null){
 System.out.println("No se encuentra el símbolo "+id.getName()+" al que se hace referencia en línea "+id.getLine()+", columna "+id.getColumn());
 RESULT=new SymAttributes("error", id.getLine(), id.getColumn(), id.getName());
 }else{
-if (symbol.getType()==exp.getType()){
+if (symbol.getType().equals(exp.getType())){
 RESULT=exp;
-}else if((symbol.getType()=="error")||(exp.getType()=="error")){
+}else if((symbol.getType().equals("error"))||(exp.getType().equals("error"))){
 RESULT=new SymAttributes("error", symbol.getRow(), symbol.getCol(), symbol.getName());
 }else{
 System.out.println("No se puede asignar la expresión a la variable "+symbol.getName()+", línea "+symbol.getRow()+", columna "+symbol.getCol());
@@ -638,7 +638,7 @@ RESULT=new SymAttributes(symbol.getType(), id.getLine(), id.getColumn(), id.getN
 		int eright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)).right;
 		SymAttributes e = (SymAttributes)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-1)).value;
 		
-if ((ScopeTree.getCurrentScope().getType()==e.getType())||(e.getType()=="error")){
+if ((ScopeTree.getCurrentScope().getType().equals(e.getType()))||(e.getType().equals("error"))){
 RESULT=e;
 }else{
 System.out.println("La sentencia return no devuelve un valor del tipo esperado. Línea "+e.getRow()+", columna "+e.getCol());
@@ -663,7 +663,7 @@ RESULT=new SymAttributes("error", e.getRow(), e.getCol(), e.getName());
 		int b2right = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		SymAttributes b2 = (SymAttributes)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
 		
-if ((l.getType()=="error")||(b1.getType()=="error")||(b2.getType()=="error")){
+if ((l.getType().equals("error"))||(b1.getType().equals("error"))||(b2.getType().equals("error"))){
 RESULT=new SymAttributes("error", l.getRow(), l.getCol(), l.getName());
 }else{
 RESULT=new SymAttributes("", 0, 0, "");
@@ -696,16 +696,16 @@ RESULT=new SymAttributes("", 0, 0, "");
 		int bright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		SymAttributes b = (SymAttributes)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
 		
-if (e1.getType()=="error") {
+if (e1.getType().equals("error")) {
 RESULT=new SymAttributes("error", e1.getRow(), e1.getCol(), e1.getName());
 }
-else if (l.getType()=="error") {
+else if (l.getType().equals("error")) {
 RESULT=new SymAttributes("error", l.getRow(), l.getCol(), l.getName());
 }
-else if (e2.getType()=="error") {
+else if (e2.getType().equals("error")) {
 RESULT=new SymAttributes("error", e2.getRow(), e2.getCol(), e2.getName());
 }
-else if(b.getType()=="error"){
+else if(b.getType().equals("error")){
 RESULT=new SymAttributes("error", b.getRow(), b.getCol(), b.getName());
 }
 else {
@@ -751,9 +751,9 @@ RESULT=new SymAttributes("", 0, 0, "");
 		int bright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		SymAttributes b = (SymAttributes)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
 		
-if (l.getType()=="error"){
+if (l.getType().equals("error")){
 RESULT=l;
-}else if (b.getType()=="error"){
+}else if (b.getType().equals("error")){
 RESULT=b;
 }else{
 RESULT=new SymAttributes("", 0, 0, "");
@@ -774,7 +774,7 @@ RESULT=new SymAttributes("", 0, 0, "");
 		int lright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)).right;
 		SymAttributes l = (SymAttributes)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-1)).value;
 		
-if ((b.getType()=="error")||(l.getType()=="error")){
+if ((b.getType().equals("error"))||(l.getType().equals("error"))){
 RESULT=new SymAttributes("error", l.getRow(), l.getCol(), l.getName());
 }else{
 RESULT=new SymAttributes("", 0, 0, "");
@@ -850,9 +850,9 @@ RESULT=l;
 		int e2right = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		SymAttributes e2 = (SymAttributes)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
 		
-if (e1.getType()==e2.getType()){
+if (e1.getType().equals(e2.getType())){
 RESULT=e1;
-}else if((e1.getType()=="error")||(e2.getType()=="error")){
+}else if((e1.getType().equals("error"))||(e2.getType().equals("error"))){
 RESULT=new SymAttributes("error", e1.getRow(), e1.getCol(), e1.getName());
 }else{
 System.out.println("El tipo de los operandos de la suma no coincide. Línea "+e1.getRow()+", columna "+e1.getCol());
@@ -874,9 +874,9 @@ RESULT=new SymAttributes("error", e1.getRow(), e1.getCol(), e1.getName());
 		int e2right = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		SymAttributes e2 = (SymAttributes)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
 		
-if (e1.getType()==e2.getType()){
+if (e1.getType().equals(e2.getType())){
 RESULT=e1;
-}else if((e1.getType()=="error")||(e2.getType()=="error")){
+}else if((e1.getType().equals("error"))||(e2.getType().equals("error"))){
 RESULT=new SymAttributes("error", e1.getRow(), e1.getCol(), e1.getName());
 }else{
 System.out.println("El tipo de los operandos de la resta no coincide. Línea "+e1.getRow()+", columna "+e1.getCol());
@@ -910,9 +910,9 @@ RESULT=new SymAttributes("error", e1.getRow(), e1.getCol(), e1.getName());
 		int fright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		SymAttributes f = (SymAttributes)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
 		
-if (e.getType()==f.getType()){
+if (e.getType().equals(f.getType())){
 RESULT=e;
-}else if((e.getType()=="error")||(f.getType()=="error")){
+}else if((e.getType().equals("error"))||(f.getType().equals("error"))){
 RESULT=new SymAttributes("error", e.getRow(), e.getCol(), e.getName());
 }else{
 System.out.println("El tipo de los operandos de la multiplicación no coincide. Línea "+e.getRow()+", columna "+e.getCol());
@@ -934,9 +934,9 @@ RESULT=new SymAttributes("error", e.getRow(), e.getCol(), e.getName());
 		int fright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		SymAttributes f = (SymAttributes)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
 		
-if (e.getType()==f.getType()){
+if (e.getType().equals(f.getType())){
 RESULT=e;
-}else if((e.getType()=="error")||(f.getType()=="error")){
+}else if((e.getType().equals("error"))||(f.getType().equals("error"))){
 RESULT=new SymAttributes("error", e.getRow(), e.getCol(), e.getName());
 }else{
 System.out.println("El tipo de los operandos de la división no coincide. Línea "+e.getRow()+", columna "+e.getCol());
@@ -1122,9 +1122,9 @@ RESULT=new SymAttributes(symbol.getType(), id.getLine(), id.getColumn(), id.getN
 		int tright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		SymAttributes t = (SymAttributes)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
 		
-if (d.getType()==t.getType()){
+if (d.getType().equals(t.getType())){
 RESULT=d;
-}else if((d.getType()=="error"||t.getType()=="error")){
+}else if((d.getType().equals("error")||t.getType().equals("error"))){
 RESULT=new SymAttributes("error", d.getRow(), d.getCol(), d.getName());
 }else{
 System.out.println("Los operandos no son compatibles con el operador or. Línea "+d.getRow()+", columna "+d.getCol());
@@ -1158,9 +1158,9 @@ RESULT=new SymAttributes("error", d.getRow(), d.getCol(), d.getName());
 		int fright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		SymAttributes f = (SymAttributes)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
 		
-if (t.getType()==f.getType()){
+if (t.getType().equals(f.getType())){
 RESULT=t;
-}else if((t.getType()=="error")||(f.getType()=="error")){
+}else if((t.getType().equals("error"))||(f.getType().equals("error"))){
 RESULT=new SymAttributes("error", t.getRow(), t.getCol(), t.getName());
 }else{
 System.out.println("Los operandos no son compatibles con el operador and. Línea "+t.getRow()+", columna "+t.getCol());
@@ -1218,9 +1218,9 @@ RESULT=new SymAttributes("error", t.getRow(), t.getCol(), t.getName());
 		int e2right = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		SymAttributes e2 = (SymAttributes)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
 		
-if (e1.getType()==e2.getType()){
+if (e1.getType().equals(e2.getType())){
 RESULT=e1;
-}else if((e1.getType()=="error")||(e2.getType()=="error")){
+}else if((e1.getType().equals("error"))||(e2.getType().equals("error"))){
 RESULT=new SymAttributes("error", e1.getRow(), e1.getCol(), e1.getName());
 }else{
 System.out.println("No se pueden comparar 2 elementos de distinto tipo. Línea "+e1.getRow()+", columna "+e1.getCol()+". El primero es de tipo "+e1.getType()+", y el segundo es "+e2.getType());
