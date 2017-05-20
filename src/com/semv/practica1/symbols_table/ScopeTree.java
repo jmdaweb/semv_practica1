@@ -4,15 +4,19 @@ public class ScopeTree {
 	private static Scope root;
 	private static Scope currentScope;
 	public static Scope getRoot () {
-		return root;
+		return ScopeTree.root;
 	}
 	public static Scope getCurrentScope(){
-		return currentScope;
+		if (ScopeTree.currentScope==null){
+			System.out.println("Cuidado, que va nulo");
+		}
+		return ScopeTree.currentScope;
 	}
 	public static void setCurrentScope(Scope sc){
-		currentScope=sc;
+		ScopeTree.currentScope=sc;
 	}
 	public static void initialize(){
-		root=new Scope(null, "main", "void");
+		ScopeTree.root=new Scope(null, "main", "void");
+		ScopeTree.currentScope=root;
 	}
 }

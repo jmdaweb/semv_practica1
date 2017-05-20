@@ -13,6 +13,7 @@ public class Element extends Symbol{
 		this.name = name;
 		this.line = line;
 		this.column = column;
+		this.value=this;
 	}
 	
 	public String getName() {
