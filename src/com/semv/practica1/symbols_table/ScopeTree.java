@@ -19,4 +19,17 @@ public class ScopeTree {
 		ScopeTree.root=new Scope(null, "main", "void");
 		ScopeTree.currentScope=root;
 	}
+	private static void mostrar(Scope sc){
+		System.out.println(sc.getType()+" "+sc.getName()+"{");
+		for (SymAttributes symbol:sc.getSymTable().getTable().values()){
+			System.out.println(symbol.getType()+" "+symbol.getName());
+		}
+		for (Scope child:sc.getChildren()){
+			mostrar(child);
+		}
+		System.out.println("}");
+	}
+	public static void mostrarArbol(){
+		mostrar(root);
+	}
 }

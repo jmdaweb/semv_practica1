@@ -22,5 +22,9 @@ public class SymTable {
 	public SymAttributes getAttributes (String key) {
 		return this.items.get(key);
 	}
+
+	public HashMap<String, SymAttributes> getTable() {
+		return items;
+	}
 	
 }

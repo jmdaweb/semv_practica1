@@ -374,6 +374,7 @@ RESULT=p2;
 		int tright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		Element t = (Element)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
 
+System.out.println("Estableciendo nuevo scope");
 Scope scope=new Scope(ScopeTree.getCurrentScope(), "", t.getName());
 ScopeTree.getCurrentScope().addChild(scope);
 ScopeTree.setCurrentScope(scope);
@@ -399,6 +400,7 @@ Scope scope=ScopeTree.getCurrentScope();
 if (scope.getParent().getSymTable().addItem(r.getName(), new SymAttributes(t.getName(), r.getRow(), r.getCol(), r.getName()))){
 scope.getSymTable().addItem(r.getName(), new SymAttributes(t.getName(), r.getRow(), r.getCol(), r.getName())); //agregamos la función también al hijo
 scope.setName(r.getName());
+scope.setType(t.getName());
 RESULT=r;
 }else{
 System.out.println("Identificador de función duplicado. Línea "+r.getRow()+", columna "+r.getCol());
@@ -407,7 +409,9 @@ RESULT=new SymAttributes("error", r.getRow(), r.getCol(), r.getName());
 if ((ScopeTree.getCurrentScope().getName()=="main")&&(ScopeTree.getCurrentScope().getParent()==ScopeTree.getRoot())){
 ScopeTree.getRoot().setSymTable(scope.getSymTable());
 scope.getParent().removeChild(scope);
+scope.getParent().setType(t.getName());
 }
+System.out.println("Volviendo al padre");
 ScopeTree.setCurrentScope(scope.getParent());
 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("PART",1, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);

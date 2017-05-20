@@ -46,4 +46,7 @@ public class Scope {
 			children.remove(child);
 		}
 	}
+	public void setType(String name) {
+		this.type=name;
+	}
 }

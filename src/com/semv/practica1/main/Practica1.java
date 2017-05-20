@@ -47,6 +47,7 @@ public class Practica1 {
 			//showHelp();
 		//}
 		readFile("ejemplo.c");
+		ScopeTree.mostrarArbol();
 	}
 
 }
