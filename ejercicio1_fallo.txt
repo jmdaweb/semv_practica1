@@ -1,0 +1,23 @@
+int suma (int a , int b) {
+	return a + b ;
+}
+
+int resta (int a , int b) {
+	return a - b ;
+}
+
+int multiplicacion (int a , int b) {
+	return a * b ;
+}
+
+int division (int a , int b) {
+	return a / b ;
+}
+
+void main (int a , int b) {
+	int c ;
+	a = suma( a, b ) ;
+	b = resta( a, b ) ;
+	c = resto( a, b );
+	c = division( a, b );
+}

@@ -1,0 +1,13 @@
+int calcularResto(int num) {
+	int a;
+	
+	a = num;
+	while (a > 10)
+		a = a / 10;
+	
+	return a;
+}
+
+void main (int num) {
+	calcularResto(num);
+}
