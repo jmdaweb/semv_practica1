@@ -39,14 +39,14 @@ public class Practica1 {
 	}
 	
 	public static void main (String[] argv) throws IOException {
-		ScopeTree.initialize();
-		//if (argv.length==1) {
-			//readFile(argv[0]);
-		//}
-		//else {
-			//showHelp();
-		//}
-		readFile("ejemplo.c");
+		ScopeTree.initialize(); //Hemos optado por hacer esto, las clases estáticas estaban devolviendo punteros nulos
+		if (argv.length==1) {
+			readFile(argv[0]);
+		}
+		else {
+			showHelp();
+		}
+		//readFile("ejemplo.c");
 		ScopeTree.mostrarArbol();
 	}
 
