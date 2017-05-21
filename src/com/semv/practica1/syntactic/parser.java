@@ -35,23 +35,23 @@ public class parser extends java_cup.runtime.lr_parser {
   /** Production table. */
   protected static final short _production_table[][] = 
     unpackFromStrings(new String[] {
-    "\000\064\000\002\002\005\000\002\002\004\000\002\002" +
+    "\000\065\000\002\002\005\000\002\002\004\000\002\002" +
     "\004\000\002\002\003\000\002\023\002\000\002\003\005" +
-    "\000\002\013\007\000\002\012\006\000\002\012\004\000" +
-    "\002\004\005\000\002\005\004\000\002\005\003\000\002" +
-    "\006\005\000\002\006\006\000\002\006\007\000\002\006" +
-    "\005\000\002\006\012\000\002\006\017\000\002\006\007" +
-    "\000\002\006\010\000\002\006\003\000\002\021\003\000" +
-    "\002\021\005\000\002\021\002\000\002\007\005\000\002" +
-    "\007\005\000\002\007\003\000\002\010\005\000\002\010" +
-    "\005\000\002\010\003\000\002\011\006\000\002\011\005" +
-    "\000\002\011\003\000\002\011\003\000\002\011\003\000" +
-    "\002\011\003\000\002\022\003\000\002\022\003\000\002" +
-    "\022\003\000\002\022\003\000\002\014\005\000\002\014" +
-    "\003\000\002\015\005\000\002\015\003\000\002\016\003" +
-    "\000\002\016\004\000\002\017\005\000\002\020\003\000" +
+    "\000\002\024\002\000\002\013\010\000\002\012\006\000" +
+    "\002\012\004\000\002\004\005\000\002\005\004\000\002" +
+    "\005\003\000\002\006\005\000\002\006\006\000\002\006" +
+    "\007\000\002\006\005\000\002\006\012\000\002\006\017" +
+    "\000\002\006\007\000\002\006\010\000\002\006\003\000" +
+    "\002\021\003\000\002\021\005\000\002\021\002\000\002" +
+    "\007\005\000\002\007\005\000\002\007\003\000\002\010" +
+    "\005\000\002\010\005\000\002\010\003\000\002\011\006" +
+    "\000\002\011\005\000\002\011\003\000\002\011\003\000" +
+    "\002\011\003\000\002\011\003\000\002\022\003\000\002" +
+    "\022\003\000\002\022\003\000\002\022\003\000\002\014" +
+    "\005\000\002\014\003\000\002\015\005\000\002\015\003" +
+    "\000\002\016\003\000\002\016\004\000\002\017\005\000" +
     "\002\020\003\000\002\020\003\000\002\020\003\000\002" +
-    "\020\003" });
+    "\020\003\000\002\020\003" });
 
   /** Access to production table. */
   public short[][] production_table() {return _production_table;}
@@ -59,137 +59,137 @@ public class parser extends java_cup.runtime.lr_parser {
   /** Parse-action table. */
   protected static final short[][] _action_table = 
     unpackFromStrings(new String[] {
-    "\000\165\000\014\044\004\046\010\047\007\050\005\051" +
-    "\006\001\002\000\004\045\166\001\002\000\006\005\uffdb" +
-    "\052\uffdb\001\002\000\006\005\uffda\052\uffda\001\002\000" +
-    "\006\005\uffdc\052\uffdc\001\002\000\006\005\uffdd\052\uffdd" +
+    "\000\166\000\014\044\004\046\010\047\007\050\005\051" +
+    "\006\001\002\000\004\045\167\001\002\000\006\005\uffda" +
+    "\052\uffda\001\002\000\006\005\uffd9\052\uffd9\001\002\000" +
+    "\006\005\uffdb\052\uffdb\001\002\000\006\005\uffdc\052\uffdc" +
     "\001\002\000\016\002\ufffe\044\004\046\010\047\007\050" +
-    "\005\051\006\001\002\000\004\002\164\001\002\000\004" +
+    "\005\051\006\001\002\000\004\002\165\001\002\000\004" +
     "\052\ufffd\001\002\000\004\052\016\001\002\000\016\002" +
     "\ufffc\044\ufffc\046\ufffc\047\ufffc\050\ufffc\051\ufffc\001\002" +
-    "\000\004\007\017\001\002\000\012\046\010\047\007\050" +
-    "\005\051\006\001\002\000\006\004\023\010\024\001\002" +
-    "\000\004\052\022\001\002\000\006\004\ufff9\010\ufff9\001" +
-    "\002\000\012\046\010\047\007\050\005\051\006\001\002" +
-    "\000\004\011\025\001\002\000\030\006\037\011\025\023" +
-    "\027\026\031\027\040\030\036\046\010\047\007\050\005" +
-    "\051\006\052\030\001\002\000\016\002\ufffb\044\ufffb\046" +
-    "\ufffb\047\ufffb\050\ufffb\051\ufffb\001\002\000\004\007\153" +
-    "\001\002\000\006\007\145\016\144\001\002\000\004\007" +
-    "\130\001\002\000\032\006\uffed\011\uffed\012\uffed\023\uffed" +
-    "\026\uffed\027\uffed\030\uffed\046\uffed\047\uffed\050\uffed\051" +
-    "\uffed\052\uffed\001\002\000\032\006\037\011\025\012\127" +
-    "\023\027\026\031\027\040\030\036\046\010\047\007\050" +
-    "\005\051\006\052\030\001\002\000\032\006\ufff6\011\ufff6" +
-    "\012\ufff6\023\ufff6\026\ufff6\027\ufff6\030\ufff6\046\ufff6\047" +
-    "\ufff6\050\ufff6\051\ufff6\052\ufff6\001\002\000\006\005\uffea" +
-    "\052\111\001\002\000\004\011\025\001\002\000\014\013" +
-    "\052\041\046\042\042\043\054\052\044\001\002\000\004" +
-    "\007\041\001\002\000\016\013\052\031\055\041\046\042" +
-    "\042\043\054\052\044\001\002\000\036\005\uffdf\010\uffdf" +
-    "\014\uffdf\015\uffdf\017\uffdf\020\uffdf\021\uffdf\022\uffdf\033" +
-    "\uffdf\034\uffdf\035\uffdf\036\uffdf\037\uffdf\040\uffdf\001\002" +
-    "\000\012\005\uffd6\010\uffd6\033\uffd6\034\uffd6\001\002\000" +
-    "\040\005\uffe1\007\107\010\uffe1\014\uffe1\015\uffe1\017\uffe1" +
-    "\020\uffe1\021\uffe1\022\uffe1\033\uffe1\034\uffe1\035\uffe1\036" +
-    "\uffe1\037\uffe1\040\uffe1\001\002\000\036\005\uffe4\010\uffe4" +
-    "\014\uffe4\015\uffe4\017\uffe4\020\uffe4\021\uffe4\022\uffe4\033" +
-    "\uffe4\034\uffe4\035\uffe4\036\uffe4\037\uffe4\040\uffe4\001\002" +
-    "\000\036\005\uffe0\010\uffe0\014\uffe0\015\uffe0\017\uffe0\020" +
-    "\uffe0\021\uffe0\022\uffe0\033\uffe0\034\uffe0\035\uffe0\036\uffe0" +
-    "\037\uffe0\040\uffe0\001\002\000\012\005\uffd5\010\uffd5\033" +
-    "\uffd5\034\uffd5\001\002\000\012\005\uffd8\010\uffd8\033\063" +
-    "\034\uffd8\001\002\000\036\005\uffe7\010\uffe7\014\uffe7\015" +
-    "\uffe7\017\uffe7\020\uffe7\021\077\022\100\033\uffe7\034\uffe7" +
-    "\035\uffe7\036\uffe7\037\uffe7\040\uffe7\001\002\000\014\013" +
-    "\052\041\046\042\042\043\054\052\044\001\002\000\020" +
-    "\015\071\017\073\020\070\035\066\036\074\037\072\040" +
-    "\075\001\002\000\036\005\uffde\010\uffde\014\uffde\015\uffde" +
-    "\017\uffde\020\uffde\021\uffde\022\uffde\033\uffde\034\uffde\035" +
-    "\uffde\036\uffde\037\uffde\040\uffde\001\002\000\014\013\052" +
-    "\041\046\042\042\043\054\052\044\001\002\000\006\010" +
-    "\060\034\057\001\002\000\016\013\052\031\055\041\046" +
-    "\042\042\043\054\052\044\001\002\000\004\011\025\001" +
-    "\002\000\032\006\uffef\011\uffef\012\uffef\023\uffef\026\uffef" +
-    "\027\uffef\030\uffef\046\uffef\047\uffef\050\uffef\051\uffef\052" +
-    "\uffef\001\002\000\012\005\uffd9\010\uffd9\033\063\034\uffd9" +
-    "\001\002\000\016\013\052\031\055\041\046\042\042\043" +
-    "\054\052\044\001\002\000\012\005\uffd7\010\uffd7\033\uffd7" +
-    "\034\uffd7\001\002\000\012\005\uffd4\010\uffd4\033\uffd4\034" +
-    "\uffd4\001\002\000\014\013\uffd1\041\uffd1\042\uffd1\043\uffd1" +
-    "\052\uffd1\001\002\000\014\013\052\041\046\042\042\043" +
-    "\054\052\044\001\002\000\014\013\052\041\046\042\042" +
-    "\043\054\052\044\001\002\000\014\013\uffd2\041\uffd2\042" +
-    "\uffd2\043\uffd2\052\uffd2\001\002\000\014\013\uffce\041\uffce" +
-    "\042\uffce\043\uffce\052\uffce\001\002\000\014\013\052\041" +
-    "\046\042\042\043\054\052\044\001\002\000\014\013\uffd0" +
+    "\000\004\007\ufffb\001\002\000\004\007\020\001\002\000" +
+    "\012\046\010\047\007\050\005\051\006\001\002\000\006" +
+    "\004\024\010\025\001\002\000\004\052\023\001\002\000" +
+    "\006\004\ufff8\010\ufff8\001\002\000\012\046\010\047\007" +
+    "\050\005\051\006\001\002\000\004\011\026\001\002\000" +
+    "\030\006\040\011\026\023\030\026\031\027\041\030\037" +
+    "\046\010\047\007\050\005\051\006\052\032\001\002\000" +
+    "\016\002\ufffa\044\ufffa\046\ufffa\047\ufffa\050\ufffa\051\ufffa" +
+    "\001\002\000\004\007\154\001\002\000\004\007\140\001" +
+    "\002\000\006\007\132\016\131\001\002\000\032\006\uffec" +
+    "\011\uffec\012\uffec\023\uffec\026\uffec\027\uffec\030\uffec\046" +
+    "\uffec\047\uffec\050\uffec\051\uffec\052\uffec\001\002\000\032" +
+    "\006\040\011\026\012\130\023\030\026\031\027\041\030" +
+    "\037\046\010\047\007\050\005\051\006\052\032\001\002" +
+    "\000\032\006\ufff5\011\ufff5\012\ufff5\023\ufff5\026\ufff5\027" +
+    "\ufff5\030\ufff5\046\ufff5\047\ufff5\050\ufff5\051\ufff5\052\ufff5" +
+    "\001\002\000\006\005\uffe9\052\112\001\002\000\004\011" +
+    "\026\001\002\000\014\013\053\041\046\042\043\043\055" +
+    "\052\045\001\002\000\004\007\042\001\002\000\016\013" +
+    "\053\031\056\041\046\042\043\043\055\052\045\001\002" +
+    "\000\036\005\uffde\010\uffde\014\uffde\015\uffde\017\uffde\020" +
+    "\uffde\021\uffde\022\uffde\033\uffde\034\uffde\035\uffde\036\uffde" +
+    "\037\uffde\040\uffde\001\002\000\012\005\uffd5\010\uffd5\033" +
+    "\uffd5\034\uffd5\001\002\000\040\005\uffe0\007\110\010\uffe0" +
+    "\014\uffe0\015\uffe0\017\uffe0\020\uffe0\021\uffe0\022\uffe0\033" +
+    "\uffe0\034\uffe0\035\uffe0\036\uffe0\037\uffe0\040\uffe0\001\002" +
+    "\000\036\005\uffdf\010\uffdf\014\uffdf\015\uffdf\017\uffdf\020" +
+    "\uffdf\021\uffdf\022\uffdf\033\uffdf\034\uffdf\035\uffdf\036\uffdf" +
+    "\037\uffdf\040\uffdf\001\002\000\036\005\uffe3\010\uffe3\014" +
+    "\uffe3\015\uffe3\017\uffe3\020\uffe3\021\uffe3\022\uffe3\033\uffe3" +
+    "\034\uffe3\035\uffe3\036\uffe3\037\uffe3\040\uffe3\001\002\000" +
+    "\012\005\uffd4\010\uffd4\033\uffd4\034\uffd4\001\002\000\012" +
+    "\005\uffd7\010\uffd7\033\064\034\uffd7\001\002\000\036\005" +
+    "\uffe6\010\uffe6\014\uffe6\015\uffe6\017\uffe6\020\uffe6\021\100" +
+    "\022\101\033\uffe6\034\uffe6\035\uffe6\036\uffe6\037\uffe6\040" +
+    "\uffe6\001\002\000\014\013\053\041\046\042\043\043\055" +
+    "\052\045\001\002\000\020\015\072\017\074\020\071\035" +
+    "\067\036\075\037\073\040\076\001\002\000\036\005\uffdd" +
+    "\010\uffdd\014\uffdd\015\uffdd\017\uffdd\020\uffdd\021\uffdd\022" +
+    "\uffdd\033\uffdd\034\uffdd\035\uffdd\036\uffdd\037\uffdd\040\uffdd" +
+    "\001\002\000\014\013\053\041\046\042\043\043\055\052" +
+    "\045\001\002\000\006\010\061\034\060\001\002\000\016" +
+    "\013\053\031\056\041\046\042\043\043\055\052\045\001" +
+    "\002\000\004\011\026\001\002\000\032\006\uffee\011\uffee" +
+    "\012\uffee\023\uffee\026\uffee\027\uffee\030\uffee\046\uffee\047" +
+    "\uffee\050\uffee\051\uffee\052\uffee\001\002\000\012\005\uffd8" +
+    "\010\uffd8\033\064\034\uffd8\001\002\000\016\013\053\031" +
+    "\056\041\046\042\043\043\055\052\045\001\002\000\012" +
+    "\005\uffd6\010\uffd6\033\uffd6\034\uffd6\001\002\000\012\005" +
+    "\uffd3\010\uffd3\033\uffd3\034\uffd3\001\002\000\014\013\uffd0" +
     "\041\uffd0\042\uffd0\043\uffd0\052\uffd0\001\002\000\014\013" +
-    "\uffcf\041\uffcf\042\uffcf\043\uffcf\052\uffcf\001\002\000\036" +
-    "\005\uffe9\010\uffe9\014\uffe9\015\uffe9\017\uffe9\020\uffe9\021" +
-    "\077\022\100\033\uffe9\034\uffe9\035\uffe9\036\uffe9\037\uffe9" +
-    "\040\uffe9\001\002\000\014\013\052\041\046\042\042\043" +
-    "\054\052\044\001\002\000\014\013\052\041\046\042\042" +
-    "\043\054\052\044\001\002\000\036\005\uffe5\010\uffe5\014" +
-    "\uffe5\015\uffe5\017\uffe5\020\uffe5\021\uffe5\022\uffe5\033\uffe5" +
-    "\034\uffe5\035\uffe5\036\uffe5\037\uffe5\040\uffe5\001\002\000" +
-    "\036\005\uffe6\010\uffe6\014\uffe6\015\uffe6\017\uffe6\020\uffe6" +
-    "\021\uffe6\022\uffe6\033\uffe6\034\uffe6\035\uffe6\036\uffe6\037" +
-    "\uffe6\040\uffe6\001\002\000\036\005\uffe8\010\uffe8\014\uffe8" +
-    "\015\uffe8\017\uffe8\020\uffe8\021\077\022\100\033\uffe8\034" +
-    "\uffe8\035\uffe8\036\uffe8\037\uffe8\040\uffe8\001\002\000\016" +
-    "\005\uffd3\010\uffd3\017\073\020\070\033\uffd3\034\uffd3\001" +
-    "\002\000\010\014\106\017\073\020\070\001\002\000\036" +
-    "\005\uffe2\010\uffe2\014\uffe2\015\uffe2\017\uffe2\020\uffe2\021" +
-    "\uffe2\022\uffe2\033\uffe2\034\uffe2\035\uffe2\036\uffe2\037\uffe2" +
-    "\040\uffe2\001\002\000\006\010\uffea\052\111\001\002\000" +
-    "\004\010\114\001\002\000\010\004\112\005\uffec\010\uffec" +
-    "\001\002\000\010\005\uffea\010\uffea\052\111\001\002\000" +
-    "\006\005\uffeb\010\uffeb\001\002\000\036\005\uffe3\010\uffe3" +
-    "\014\uffe3\015\uffe3\017\uffe3\020\uffe3\021\uffe3\022\uffe3\033" +
-    "\uffe3\034\uffe3\035\uffe3\036\uffe3\037\uffe3\040\uffe3\001\002" +
-    "\000\010\005\116\017\073\020\070\001\002\000\032\006" +
-    "\ufff2\011\ufff2\012\ufff2\023\ufff2\026\ufff2\027\ufff2\030\ufff2" +
-    "\046\ufff2\047\ufff2\050\ufff2\051\ufff2\052\ufff2\001\002\000" +
-    "\004\032\120\001\002\000\004\007\121\001\002\000\016" +
-    "\013\052\031\055\041\046\042\042\043\054\052\044\001" +
-    "\002\000\006\010\123\034\057\001\002\000\032\006\uffee" +
-    "\011\uffee\012\uffee\023\uffee\026\uffee\027\uffee\030\uffee\046" +
-    "\uffee\047\uffee\050\uffee\051\uffee\052\uffee\001\002\000\004" +
-    "\005\125\001\002\000\032\006\ufff5\011\ufff5\012\ufff5\023" +
-    "\ufff5\026\ufff5\027\ufff5\030\ufff5\046\ufff5\047\ufff5\050\ufff5" +
-    "\051\ufff5\052\ufff5\001\002\000\032\006\ufff7\011\ufff7\012" +
-    "\ufff7\023\ufff7\026\ufff7\027\ufff7\030\ufff7\046\ufff7\047\ufff7" +
-    "\050\ufff7\051\ufff7\052\ufff7\001\002\000\042\002\ufff8\006" +
-    "\ufff8\011\ufff8\012\ufff8\023\ufff8\025\ufff8\026\ufff8\027\ufff8" +
-    "\030\ufff8\032\ufff8\044\ufff8\046\ufff8\047\ufff8\050\ufff8\051" +
-    "\ufff8\052\ufff8\001\002\000\004\052\131\001\002\000\004" +
-    "\016\132\001\002\000\014\013\052\041\046\042\042\043" +
-    "\054\052\044\001\002\000\010\005\134\017\073\020\070" +
-    "\001\002\000\016\013\052\031\055\041\046\042\042\043" +
-    "\054\052\044\001\002\000\006\005\136\034\057\001\002" +
-    "\000\004\052\137\001\002\000\004\016\140\001\002\000" +
-    "\014\013\052\041\046\042\042\043\054\052\044\001\002" +
-    "\000\010\010\142\017\073\020\070\001\002\000\004\011" +
-    "\025\001\002\000\032\006\ufff0\011\ufff0\012\ufff0\023\ufff0" +
+    "\053\041\046\042\043\043\055\052\045\001\002\000\014" +
+    "\013\053\041\046\042\043\043\055\052\045\001\002\000" +
+    "\014\013\uffd1\041\uffd1\042\uffd1\043\uffd1\052\uffd1\001\002" +
+    "\000\014\013\uffcd\041\uffcd\042\uffcd\043\uffcd\052\uffcd\001" +
+    "\002\000\014\013\053\041\046\042\043\043\055\052\045" +
+    "\001\002\000\014\013\uffcf\041\uffcf\042\uffcf\043\uffcf\052" +
+    "\uffcf\001\002\000\014\013\uffce\041\uffce\042\uffce\043\uffce" +
+    "\052\uffce\001\002\000\036\005\uffe8\010\uffe8\014\uffe8\015" +
+    "\uffe8\017\uffe8\020\uffe8\021\100\022\101\033\uffe8\034\uffe8" +
+    "\035\uffe8\036\uffe8\037\uffe8\040\uffe8\001\002\000\014\013" +
+    "\053\041\046\042\043\043\055\052\045\001\002\000\014" +
+    "\013\053\041\046\042\043\043\055\052\045\001\002\000" +
+    "\036\005\uffe4\010\uffe4\014\uffe4\015\uffe4\017\uffe4\020\uffe4" +
+    "\021\uffe4\022\uffe4\033\uffe4\034\uffe4\035\uffe4\036\uffe4\037" +
+    "\uffe4\040\uffe4\001\002\000\036\005\uffe5\010\uffe5\014\uffe5" +
+    "\015\uffe5\017\uffe5\020\uffe5\021\uffe5\022\uffe5\033\uffe5\034" +
+    "\uffe5\035\uffe5\036\uffe5\037\uffe5\040\uffe5\001\002\000\036" +
+    "\005\uffe7\010\uffe7\014\uffe7\015\uffe7\017\uffe7\020\uffe7\021" +
+    "\100\022\101\033\uffe7\034\uffe7\035\uffe7\036\uffe7\037\uffe7" +
+    "\040\uffe7\001\002\000\016\005\uffd2\010\uffd2\017\074\020" +
+    "\071\033\uffd2\034\uffd2\001\002\000\010\014\107\017\074" +
+    "\020\071\001\002\000\036\005\uffe1\010\uffe1\014\uffe1\015" +
+    "\uffe1\017\uffe1\020\uffe1\021\uffe1\022\uffe1\033\uffe1\034\uffe1" +
+    "\035\uffe1\036\uffe1\037\uffe1\040\uffe1\001\002\000\006\010" +
+    "\uffe9\052\112\001\002\000\004\010\115\001\002\000\010" +
+    "\004\113\005\uffeb\010\uffeb\001\002\000\010\005\uffe9\010" +
+    "\uffe9\052\112\001\002\000\006\005\uffea\010\uffea\001\002" +
+    "\000\036\005\uffe2\010\uffe2\014\uffe2\015\uffe2\017\uffe2\020" +
+    "\uffe2\021\uffe2\022\uffe2\033\uffe2\034\uffe2\035\uffe2\036\uffe2" +
+    "\037\uffe2\040\uffe2\001\002\000\010\005\117\017\074\020" +
+    "\071\001\002\000\032\006\ufff1\011\ufff1\012\ufff1\023\ufff1" +
+    "\026\ufff1\027\ufff1\030\ufff1\046\ufff1\047\ufff1\050\ufff1\051" +
+    "\ufff1\052\ufff1\001\002\000\004\032\121\001\002\000\004" +
+    "\007\122\001\002\000\016\013\053\031\056\041\046\042" +
+    "\043\043\055\052\045\001\002\000\006\010\124\034\060" +
+    "\001\002\000\032\006\uffed\011\uffed\012\uffed\023\uffed\026" +
+    "\uffed\027\uffed\030\uffed\046\uffed\047\uffed\050\uffed\051\uffed" +
+    "\052\uffed\001\002\000\004\005\126\001\002\000\032\006" +
+    "\ufff4\011\ufff4\012\ufff4\023\ufff4\026\ufff4\027\ufff4\030\ufff4" +
+    "\046\ufff4\047\ufff4\050\ufff4\051\ufff4\052\ufff4\001\002\000" +
+    "\032\006\ufff6\011\ufff6\012\ufff6\023\ufff6\026\ufff6\027\ufff6" +
+    "\030\ufff6\046\ufff6\047\ufff6\050\ufff6\051\ufff6\052\ufff6\001" +
+    "\002\000\042\002\ufff7\006\ufff7\011\ufff7\012\ufff7\023\ufff7" +
+    "\025\ufff7\026\ufff7\027\ufff7\030\ufff7\032\ufff7\044\ufff7\046" +
+    "\ufff7\047\ufff7\050\ufff7\051\ufff7\052\ufff7\001\002\000\014" +
+    "\013\053\041\046\042\043\043\055\052\045\001\002\000" +
+    "\006\010\uffe9\052\112\001\002\000\004\010\134\001\002" +
+    "\000\004\005\135\001\002\000\032\006\ufff2\011\ufff2\012" +
+    "\ufff2\023\ufff2\026\ufff2\027\ufff2\030\ufff2\046\ufff2\047\ufff2" +
+    "\050\ufff2\051\ufff2\052\ufff2\001\002\000\010\005\137\017" +
+    "\074\020\071\001\002\000\032\006\ufff3\011\ufff3\012\ufff3" +
+    "\023\ufff3\026\ufff3\027\ufff3\030\ufff3\046\ufff3\047\ufff3\050" +
+    "\ufff3\051\ufff3\052\ufff3\001\002\000\004\052\141\001\002" +
+    "\000\004\016\142\001\002\000\014\013\053\041\046\042" +
+    "\043\043\055\052\045\001\002\000\010\005\144\017\074" +
+    "\020\071\001\002\000\016\013\053\031\056\041\046\042" +
+    "\043\043\055\052\045\001\002\000\006\005\146\034\060" +
+    "\001\002\000\004\052\147\001\002\000\004\016\150\001" +
+    "\002\000\014\013\053\041\046\042\043\043\055\052\045" +
+    "\001\002\000\010\010\152\017\074\020\071\001\002\000" +
+    "\004\011\026\001\002\000\032\006\uffef\011\uffef\012\uffef" +
+    "\023\uffef\026\uffef\027\uffef\030\uffef\046\uffef\047\uffef\050" +
+    "\uffef\051\uffef\052\uffef\001\002\000\016\013\053\031\056" +
+    "\041\046\042\043\043\055\052\045\001\002\000\006\010" +
+    "\156\034\060\001\002\000\004\024\157\001\002\000\004" +
+    "\011\026\001\002\000\004\025\161\001\002\000\004\011" +
+    "\026\001\002\000\032\006\ufff0\011\ufff0\012\ufff0\023\ufff0" +
     "\026\ufff0\027\ufff0\030\ufff0\046\ufff0\047\ufff0\050\ufff0\051" +
-    "\ufff0\052\ufff0\001\002\000\014\013\052\041\046\042\042" +
-    "\043\054\052\044\001\002\000\006\010\uffea\052\111\001" +
-    "\002\000\004\010\147\001\002\000\004\005\150\001\002" +
-    "\000\032\006\ufff3\011\ufff3\012\ufff3\023\ufff3\026\ufff3\027" +
-    "\ufff3\030\ufff3\046\ufff3\047\ufff3\050\ufff3\051\ufff3\052\ufff3" +
-    "\001\002\000\010\005\152\017\073\020\070\001\002\000" +
-    "\032\006\ufff4\011\ufff4\012\ufff4\023\ufff4\026\ufff4\027\ufff4" +
-    "\030\ufff4\046\ufff4\047\ufff4\050\ufff4\051\ufff4\052\ufff4\001" +
-    "\002\000\016\013\052\031\055\041\046\042\042\043\054" +
-    "\052\044\001\002\000\006\010\155\034\057\001\002\000" +
-    "\004\024\156\001\002\000\004\011\025\001\002\000\004" +
-    "\025\160\001\002\000\004\011\025\001\002\000\032\006" +
-    "\ufff1\011\ufff1\012\ufff1\023\ufff1\026\ufff1\027\ufff1\030\ufff1" +
-    "\046\ufff1\047\ufff1\050\ufff1\051\ufff1\052\ufff1\001\002\000" +
-    "\004\052\163\001\002\000\006\004\ufffa\010\ufffa\001\002" +
-    "\000\004\002\000\001\002\000\004\002\uffff\001\002\000" +
-    "\014\044\004\046\010\047\007\050\005\051\006\001\002" +
-    "\000\004\002\001\001\002" });
+    "\ufff0\052\ufff0\001\002\000\004\052\164\001\002\000\006" +
+    "\004\ufff9\010\ufff9\001\002\000\004\002\000\001\002\000" +
+    "\004\002\uffff\001\002\000\014\044\004\046\010\047\007" +
+    "\050\005\051\006\001\002\000\004\002\001\001\002" });
 
   /** Access to parse-action table. */
   public short[][] action_table() {return _action_table;}
@@ -197,58 +197,58 @@ public class parser extends java_cup.runtime.lr_parser {
   /** <code>reduce_goto</code> table. */
   protected static final short[][] _reduce_table = 
     unpackFromStrings(new String[] {
-    "\000\165\000\010\002\011\003\010\022\012\001\001\000" +
+    "\000\166\000\010\002\011\003\010\022\012\001\001\000" +
     "\002\001\001\000\002\001\001\000\002\001\001\000\002" +
-    "\001\001\000\002\001\001\000\010\002\164\003\010\022" +
+    "\001\001\000\002\001\001\000\010\002\165\003\010\022" +
     "\012\001\001\000\002\001\001\000\004\023\013\001\001" +
-    "\000\004\013\014\001\001\000\002\001\001\000\002\001" +
-    "\001\000\006\012\017\022\020\001\001\000\002\001\001" +
-    "\000\002\001\001\000\002\001\001\000\004\022\161\001" +
-    "\001\000\004\004\025\001\001\000\012\004\031\005\032" +
-    "\006\033\022\034\001\001\000\002\001\001\000\002\001" +
-    "\001\000\002\001\001\000\002\001\001\000\002\001\001" +
-    "\000\010\004\031\006\125\022\034\001\001\000\002\001" +
-    "\001\000\004\021\123\001\001\000\004\004\116\001\001" +
-    "\000\010\007\114\010\050\011\044\001\001\000\002\001" +
-    "\001\000\020\007\052\010\050\011\044\014\055\015\047" +
-    "\016\042\017\046\001\001\000\002\001\001\000\002\001" +
-    "\001\000\002\001\001\000\002\001\001\000\002\001\001" +
-    "\000\002\001\001\000\002\001\001\000\002\001\001\000" +
-    "\010\007\104\010\050\011\044\001\001\000\004\020\066" +
-    "\001\001\000\002\001\001\000\012\007\052\010\050\011" +
-    "\044\017\064\001\001\000\002\001\001\000\016\007\052" +
-    "\010\050\011\044\015\061\016\042\017\046\001\001\000" +
-    "\004\004\060\001\001\000\002\001\001\000\002\001\001" +
-    "\000\014\007\052\010\050\011\044\016\063\017\046\001" +
-    "\001\000\002\001\001\000\002\001\001\000\002\001\001" +
-    "\000\010\007\103\010\050\011\044\001\001\000\006\010" +
-    "\102\011\044\001\001\000\002\001\001\000\002\001\001" +
-    "\000\006\010\075\011\044\001\001\000\002\001\001\000" +
-    "\002\001\001\000\002\001\001\000\004\011\101\001\001" +
-    "\000\004\011\100\001\001\000\002\001\001\000\002\001" +
-    "\001\000\002\001\001\000\002\001\001\000\002\001\001" +
-    "\000\002\001\001\000\004\021\107\001\001\000\002\001" +
-    "\001\000\002\001\001\000\004\021\112\001\001\000\002" +
+    "\000\004\013\014\001\001\000\002\001\001\000\004\024" +
+    "\016\001\001\000\002\001\001\000\006\012\020\022\021" +
     "\001\001\000\002\001\001\000\002\001\001\000\002\001" +
-    "\001\000\002\001\001\000\002\001\001\000\020\007\052" +
-    "\010\050\011\044\014\121\015\047\016\042\017\046\001" +
+    "\001\000\004\022\162\001\001\000\004\004\026\001\001" +
+    "\000\012\004\032\005\033\006\034\022\035\001\001\000" +
+    "\002\001\001\000\002\001\001\000\002\001\001\000\002" +
+    "\001\001\000\002\001\001\000\010\004\032\006\126\022" +
+    "\035\001\001\000\002\001\001\000\004\021\124\001\001" +
+    "\000\004\004\117\001\001\000\010\007\115\010\051\011" +
+    "\046\001\001\000\002\001\001\000\020\007\053\010\051" +
+    "\011\046\014\056\015\050\016\043\017\047\001\001\000" +
+    "\002\001\001\000\002\001\001\000\002\001\001\000\002" +
+    "\001\001\000\002\001\001\000\002\001\001\000\002\001" +
+    "\001\000\002\001\001\000\010\007\105\010\051\011\046" +
+    "\001\001\000\004\020\067\001\001\000\002\001\001\000" +
+    "\012\007\053\010\051\011\046\017\065\001\001\000\002" +
+    "\001\001\000\016\007\053\010\051\011\046\015\062\016" +
+    "\043\017\047\001\001\000\004\004\061\001\001\000\002" +
+    "\001\001\000\002\001\001\000\014\007\053\010\051\011" +
+    "\046\016\064\017\047\001\001\000\002\001\001\000\002" +
+    "\001\001\000\002\001\001\000\010\007\104\010\051\011" +
+    "\046\001\001\000\006\010\103\011\046\001\001\000\002" +
+    "\001\001\000\002\001\001\000\006\010\076\011\046\001" +
     "\001\000\002\001\001\000\002\001\001\000\002\001\001" +
-    "\000\002\001\001\000\002\001\001\000\002\001\001\000" +
-    "\002\001\001\000\002\001\001\000\010\007\132\010\050" +
-    "\011\044\001\001\000\002\001\001\000\020\007\052\010" +
-    "\050\011\044\014\134\015\047\016\042\017\046\001\001" +
-    "\000\002\001\001\000\002\001\001\000\002\001\001\000" +
-    "\010\007\140\010\050\011\044\001\001\000\002\001\001" +
-    "\000\004\004\142\001\001\000\002\001\001\000\010\007" +
-    "\150\010\050\011\044\001\001\000\004\021\145\001\001" +
-    "\000\002\001\001\000\002\001\001\000\002\001\001\000" +
-    "\002\001\001\000\002\001\001\000\020\007\052\010\050" +
-    "\011\044\014\153\015\047\016\042\017\046\001\001\000" +
-    "\002\001\001\000\002\001\001\000\004\004\156\001\001" +
-    "\000\002\001\001\000\004\004\160\001\001\000\002\001" +
-    "\001\000\002\001\001\000\002\001\001\000\002\001\001" +
-    "\000\002\001\001\000\010\002\166\003\010\022\012\001" +
-    "\001\000\002\001\001" });
+    "\000\004\011\102\001\001\000\004\011\101\001\001\000" +
+    "\002\001\001\000\002\001\001\000\002\001\001\000\002" +
+    "\001\001\000\002\001\001\000\002\001\001\000\004\021" +
+    "\110\001\001\000\002\001\001\000\002\001\001\000\004" +
+    "\021\113\001\001\000\002\001\001\000\002\001\001\000" +
+    "\002\001\001\000\002\001\001\000\002\001\001\000\002" +
+    "\001\001\000\020\007\053\010\051\011\046\014\122\015" +
+    "\050\016\043\017\047\001\001\000\002\001\001\000\002" +
+    "\001\001\000\002\001\001\000\002\001\001\000\002\001" +
+    "\001\000\002\001\001\000\010\007\135\010\051\011\046" +
+    "\001\001\000\004\021\132\001\001\000\002\001\001\000" +
+    "\002\001\001\000\002\001\001\000\002\001\001\000\002" +
+    "\001\001\000\002\001\001\000\002\001\001\000\010\007" +
+    "\142\010\051\011\046\001\001\000\002\001\001\000\020" +
+    "\007\053\010\051\011\046\014\144\015\050\016\043\017" +
+    "\047\001\001\000\002\001\001\000\002\001\001\000\002" +
+    "\001\001\000\010\007\150\010\051\011\046\001\001\000" +
+    "\002\001\001\000\004\004\152\001\001\000\002\001\001" +
+    "\000\020\007\053\010\051\011\046\014\154\015\050\016" +
+    "\043\017\047\001\001\000\002\001\001\000\002\001\001" +
+    "\000\004\004\157\001\001\000\002\001\001\000\004\004" +
+    "\161\001\001\000\002\001\001\000\002\001\001\000\002" +
+    "\001\001\000\002\001\001\000\002\001\001\000\010\002" +
+    "\167\003\010\022\012\001\001\000\002\001\001" });
 
   /** Access to <code>reduce_goto</code> table. */
   public short[][] reduce_table() {return _reduce_table;}
@@ -374,7 +374,6 @@ RESULT=p2;
 		int tright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		Element t = (Element)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
 
-System.out.println("Estableciendo nuevo scope");
 Scope scope=new Scope(ScopeTree.getCurrentScope(), "", t.getName());
 ScopeTree.getCurrentScope().addChild(scope);
 ScopeTree.setCurrentScope(scope);
@@ -396,35 +395,39 @@ ScopeTree.setCurrentScope(scope);
 		int rright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		SymAttributes r = (SymAttributes)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
 		
-Scope scope=ScopeTree.getCurrentScope();
-if (scope.getParent().getSymTable().addItem(r.getName(), new SymAttributes(t.getName(), r.getRow(), r.getCol(), r.getName()))){
-scope.getSymTable().addItem(r.getName(), new SymAttributes(t.getName(), r.getRow(), r.getCol(), r.getName())); //agregamos la función también al hijo
-scope.setName(r.getName());
-scope.setType(t.getName());
+ScopeTree.setCurrentScope(ScopeTree.getCurrentScope().getParent());
 RESULT=r;
-}else{
-System.out.println("Identificador de función duplicado. Línea "+r.getRow()+", columna "+r.getCol());
-RESULT=new SymAttributes("error", r.getRow(), r.getCol(), r.getName());
-}
-if ((ScopeTree.getCurrentScope().getName().equals("main"))&&(ScopeTree.getCurrentScope().getParent()==ScopeTree.getRoot())){
-ScopeTree.getRoot().setSymTable(scope.getSymTable());
-scope.getParent().removeChild(scope);
-scope.getParent().setType(t.getName());
-}
-System.out.println("Volviendo al padre");
-ScopeTree.setCurrentScope(scope.getParent());
 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("PART",1, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 6: // RESTPART ::= tid l_par LISTPARAM r_par BLQ 
+          case 6: // NT$1 ::= 
             {
               SymAttributes RESULT =null;
-		int idleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-4)).left;
-		int idright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-4)).right;
-		Element id = (Element)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-4)).value;
+		int idleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
+		int idright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
+		Element id = (Element)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
+
+Scope scope=ScopeTree.getCurrentScope();
+if (scope.getParent().getSymTable().addItem(id.getName(), new SymAttributes(scope.getType(), id.getLine(), id.getColumn(), id.getName()))){
+scope.setName(id.getName());
+}
+
+              CUP$parser$result = parser.getSymbolFactory().newSymbol("NT$1",18, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
+            }
+          return CUP$parser$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 7: // RESTPART ::= tid NT$1 l_par LISTPARAM r_par BLQ 
+            {
+              SymAttributes RESULT =null;
+              // propagate RESULT from NT$1
+                RESULT = (SymAttributes) ((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-4)).value;
+		int idleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-5)).left;
+		int idright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-5)).right;
+		Element id = (Element)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-5)).value;
 		int lleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)).left;
 		int lright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)).right;
 		SymAttributes l = (SymAttributes)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-2)).value;
@@ -438,12 +441,12 @@ RESULT=b; //propagamos el error
 RESULT=new SymAttributes("", id.getLine(), id.getColumn(), id.getName());
 }
 
-              CUP$parser$result = parser.getSymbolFactory().newSymbol("RESTPART",9, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-4)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
+              CUP$parser$result = parser.getSymbolFactory().newSymbol("RESTPART",9, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-5)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 7: // LISTPARAM ::= LISTPARAM comma TYPE tid 
+          case 8: // LISTPARAM ::= LISTPARAM comma TYPE tid 
             {
               SymAttributes RESULT =null;
 		int lleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-3)).left;
@@ -463,7 +466,7 @@ SymAttributes symbol=new SymAttributes(t.getName(), id.getLine(), id.getColumn()
 if (ScopeTree.getCurrentScope().getSymTable().addItem(symbol.getName(), symbol)){
 RESULT=symbol;
 }else{
-System.out.println("Identificador repetido en la cabecera de la función. Línea "+symbol.getRow()+", columna "+symbol.getCol());
+System.out.println("Identificador repetido en la cabecera de la funci�n. L�nea "+symbol.getRow()+", columna "+symbol.getCol());
 RESULT=new SymAttributes("error", symbol.getRow(), symbol.getCol(), symbol.getName());
 }
 }
@@ -473,7 +476,7 @@ RESULT=new SymAttributes("error", symbol.getRow(), symbol.getCol(), symbol.getNa
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 8: // LISTPARAM ::= TYPE tid 
+          case 9: // LISTPARAM ::= TYPE tid 
             {
               SymAttributes RESULT =null;
 		int tleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)).left;
@@ -492,7 +495,7 @@ RESULT=symbol;
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 9: // BLQ ::= l_brace SENTLIST r_brace 
+          case 10: // BLQ ::= l_brace SENTLIST r_brace 
             {
               SymAttributes RESULT =null;
 		int sleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)).left;
@@ -505,7 +508,7 @@ RESULT=s;
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 10: // SENTLIST ::= SENTLIST SENT 
+          case 11: // SENTLIST ::= SENTLIST SENT 
             {
               SymAttributes RESULT =null;
 		int lleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)).left;
@@ -526,7 +529,7 @@ RESULT=l;
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 11: // SENTLIST ::= SENT 
+          case 12: // SENTLIST ::= SENT 
             {
               SymAttributes RESULT =null;
 		int sleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
@@ -538,7 +541,7 @@ RESULT=l;
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 12: // SENT ::= TYPE LID semicolon 
+          case 13: // SENT ::= TYPE LID semicolon 
             {
               SymAttributes RESULT =null;
 		int tleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)).left;
@@ -554,7 +557,7 @@ if (ScopeTree.getCurrentScope().getSymTable().addItem(id.getName(), symAttribute
 		RESULT = symAttributes;
 	}
 	else{
-		System.out.println("El símbolo " + id.getName() + " existe. Lin " + id.getLine() + " Col " + id.getColumn());
+		System.out.println("El s�mbolo " + id.getName() + " existe. Lin " + id.getLine() + " Col " + id.getColumn());
 		RESULT=new SymAttributes("error", -1, -1, "error");
 		break;
 	}
@@ -565,7 +568,7 @@ if (ScopeTree.getCurrentScope().getSymTable().addItem(id.getName(), symAttribute
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 13: // SENT ::= tid assig EXP semicolon 
+          case 14: // SENT ::= tid assig EXP semicolon 
             {
               SymAttributes RESULT =null;
 		int idleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-3)).left;
@@ -577,7 +580,7 @@ if (ScopeTree.getCurrentScope().getSymTable().addItem(id.getName(), symAttribute
 		
 SymAttributes symbol=null;
 Scope scope=ScopeTree.getCurrentScope();
-while (scope.getParent()!=null){
+while (scope!=null){
 symbol=scope.getSymTable().getAttributes(id.getName());
 if (symbol!=null){
 break; // lo hemos encontrado!
@@ -585,7 +588,7 @@ break; // lo hemos encontrado!
 scope=scope.getParent();
 }
 if (symbol==null){
-System.out.println("No se encuentra el símbolo "+id.getName()+" al que se hace referencia en línea "+id.getLine()+", columna "+id.getColumn());
+System.out.println("No se encuentra el s�mbolo "+id.getName()+" al que se hace referencia en l�nea "+id.getLine()+", columna "+id.getColumn());
 RESULT=new SymAttributes("error", id.getLine(), id.getColumn(), id.getName());
 }else{
 if (symbol.getType().equals(exp.getType())){
@@ -593,7 +596,7 @@ RESULT=exp;
 }else if((symbol.getType().equals("error"))||(exp.getType().equals("error"))){
 RESULT=new SymAttributes("error", symbol.getRow(), symbol.getCol(), symbol.getName());
 }else{
-System.out.println("No se puede asignar la expresión a la variable "+symbol.getName()+", línea "+symbol.getRow()+", columna "+symbol.getCol());
+System.out.println("No se puede asignar la expresi�n a la variable "+symbol.getName()+", l�nea "+symbol.getRow()+", columna "+symbol.getCol());
 RESULT=new SymAttributes("error", symbol.getRow(), symbol.getCol(), symbol.getName());
 }
 }
@@ -603,7 +606,7 @@ RESULT=new SymAttributes("error", symbol.getRow(), symbol.getCol(), symbol.getNa
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 14: // SENT ::= tid l_par LID r_par semicolon 
+          case 15: // SENT ::= tid l_par LID r_par semicolon 
             {
               SymAttributes RESULT =null;
 		int idleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-4)).left;
@@ -612,7 +615,7 @@ RESULT=new SymAttributes("error", symbol.getRow(), symbol.getCol(), symbol.getNa
 		
 SymAttributes symbol=null;
 Scope scope=ScopeTree.getCurrentScope();
-while (scope.getParent()!=null){
+while (scope!=null){
 symbol=scope.getSymTable().getAttributes(id.getName());
 if (symbol!=null){
 break; // lo hemos encontrado!
@@ -620,7 +623,7 @@ break; // lo hemos encontrado!
 scope=scope.getParent();
 }
 if (symbol==null){
-System.out.println("No se encuentra el símbolo "+id.getName()+" al que se hace referencia en línea "+id.getLine()+", columna "+id.getColumn());
+System.out.println("No se encuentra el s�mbolo "+id.getName()+" al que se hace referencia en l�nea "+id.getLine()+", columna "+id.getColumn());
 RESULT=new SymAttributes("error", id.getLine(), id.getColumn(), id.getName());
 }else{
 RESULT=new SymAttributes(symbol.getType(), id.getLine(), id.getColumn(), id.getName());
@@ -631,7 +634,7 @@ RESULT=new SymAttributes(symbol.getType(), id.getLine(), id.getColumn(), id.getN
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 15: // SENT ::= treturn EXP semicolon 
+          case 16: // SENT ::= treturn EXP semicolon 
             {
               SymAttributes RESULT =null;
 		int eleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)).left;
@@ -641,7 +644,7 @@ RESULT=new SymAttributes(symbol.getType(), id.getLine(), id.getColumn(), id.getN
 if ((ScopeTree.getCurrentScope().getType().equals(e.getType()))||(e.getType().equals("error"))){
 RESULT=e;
 }else{
-System.out.println("La sentencia return no devuelve un valor del tipo esperado. Línea "+e.getRow()+", columna "+e.getCol());
+System.out.println("La sentencia return no devuelve un valor del tipo esperado. L�nea "+e.getRow()+", columna "+e.getCol());
 RESULT=new SymAttributes("error", e.getRow(), e.getCol(), e.getName());
 }
 
@@ -650,7 +653,7 @@ RESULT=new SymAttributes("error", e.getRow(), e.getCol(), e.getName());
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 16: // SENT ::= tif l_par LCOND r_par tthen BLQ telse BLQ 
+          case 17: // SENT ::= tif l_par LCOND r_par tthen BLQ telse BLQ 
             {
               SymAttributes RESULT =null;
 		int lleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-5)).left;
@@ -674,7 +677,7 @@ RESULT=new SymAttributes("", 0, 0, "");
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 17: // SENT ::= tfor l_par tid assig EXP semicolon LCOND semicolon tid assig EXP r_par BLQ 
+          case 18: // SENT ::= tfor l_par tid assig EXP semicolon LCOND semicolon tid assig EXP r_par BLQ 
             {
               SymAttributes RESULT =null;
 		int id1left = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-10)).left;
@@ -709,11 +712,11 @@ else if(b.getType().equals("error")){
 RESULT=new SymAttributes("error", b.getRow(), b.getCol(), b.getName());
 }
 else {
-//no hay errores en las expresiones, vamos a ver si existen los símbolos
+//no hay errores en las expresiones, vamos a ver si existen los s�mbolos
 SymAttributes symbol1=null;
 SymAttributes symbol2=null;
 Scope scope=ScopeTree.getCurrentScope();
-while (scope.getParent()!=null){
+while (scope!=null){
 if (symbol1==null){
 symbol1=scope.getSymTable().getAttributes(id1.getName());
 }
@@ -726,10 +729,10 @@ break; // hemos encontrado los 2
 scope=scope.getParent();
 }
 if (symbol1==null){
-System.out.println("No se encuentra el símbolo "+id1.getName()+" al que se hace referencia en línea "+id1.getLine()+", columna "+id1.getColumn());
+System.out.println("No se encuentra el s�mbolo "+id1.getName()+" al que se hace referencia en l�nea "+id1.getLine()+", columna "+id1.getColumn());
 RESULT=new SymAttributes("error", id1.getLine(), id1.getColumn(), id1.getName());
 }else if(symbol2==null){
-System.out.println("No se encuentra el símbolo "+id2.getName()+" al que se hace referencia en línea "+id2.getLine()+", columna "+id2.getColumn());
+System.out.println("No se encuentra el s�mbolo "+id2.getName()+" al que se hace referencia en l�nea "+id2.getLine()+", columna "+id2.getColumn());
 RESULT=new SymAttributes("error", id2.getLine(), id2.getColumn(), id2.getName());
 }else{
 RESULT=new SymAttributes("", 0, 0, "");
@@ -741,7 +744,7 @@ RESULT=new SymAttributes("", 0, 0, "");
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 18: // SENT ::= twhile l_par LCOND r_par BLQ 
+          case 19: // SENT ::= twhile l_par LCOND r_par BLQ 
             {
               SymAttributes RESULT =null;
 		int lleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)).left;
@@ -764,7 +767,7 @@ RESULT=new SymAttributes("", 0, 0, "");
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 19: // SENT ::= tdo BLQ tuntil l_par LCOND r_par 
+          case 20: // SENT ::= tdo BLQ tuntil l_par LCOND r_par 
             {
               SymAttributes RESULT =null;
 		int bleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-4)).left;
@@ -785,7 +788,7 @@ RESULT=new SymAttributes("", 0, 0, "");
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 20: // SENT ::= BLQ 
+          case 21: // SENT ::= BLQ 
             {
               SymAttributes RESULT =null;
 		int bleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
@@ -797,7 +800,7 @@ RESULT=new SymAttributes("", 0, 0, "");
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 21: // LID ::= tid 
+          case 22: // LID ::= tid 
             {
               ArrayList<Element> RESULT =null;
 		int idleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
@@ -813,7 +816,7 @@ RESULT=salida;
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 22: // LID ::= tid comma LID 
+          case 23: // LID ::= tid comma LID 
             {
               ArrayList<Element> RESULT =null;
 		int tleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)).left;
@@ -831,7 +834,7 @@ RESULT=l;
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 23: // LID ::= 
+          case 24: // LID ::= 
             {
               ArrayList<Element> RESULT =null;
 
@@ -840,7 +843,7 @@ RESULT=l;
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 24: // EXP ::= EXP add EXPT 
+          case 25: // EXP ::= EXP add EXPT 
             {
               SymAttributes RESULT =null;
 		int e1left = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)).left;
@@ -855,7 +858,7 @@ RESULT=e1;
 }else if((e1.getType().equals("error"))||(e2.getType().equals("error"))){
 RESULT=new SymAttributes("error", e1.getRow(), e1.getCol(), e1.getName());
 }else{
-System.out.println("El tipo de los operandos de la suma no coincide. Línea "+e1.getRow()+", columna "+e1.getCol());
+System.out.println("El tipo de los operandos de la suma no coincide. L�nea "+e1.getRow()+", columna "+e1.getCol());
 RESULT=new SymAttributes("error", e1.getRow(), e1.getCol(), e1.getName());
 }
 
@@ -864,7 +867,7 @@ RESULT=new SymAttributes("error", e1.getRow(), e1.getCol(), e1.getName());
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 25: // EXP ::= EXP sub EXPT 
+          case 26: // EXP ::= EXP sub EXPT 
             {
               SymAttributes RESULT =null;
 		int e1left = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)).left;
@@ -879,7 +882,7 @@ RESULT=e1;
 }else if((e1.getType().equals("error"))||(e2.getType().equals("error"))){
 RESULT=new SymAttributes("error", e1.getRow(), e1.getCol(), e1.getName());
 }else{
-System.out.println("El tipo de los operandos de la resta no coincide. Línea "+e1.getRow()+", columna "+e1.getCol());
+System.out.println("El tipo de los operandos de la resta no coincide. L�nea "+e1.getRow()+", columna "+e1.getCol());
 RESULT=new SymAttributes("error", e1.getRow(), e1.getCol(), e1.getName());
 }
 
@@ -888,7 +891,7 @@ RESULT=new SymAttributes("error", e1.getRow(), e1.getCol(), e1.getName());
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 26: // EXP ::= EXPT 
+          case 27: // EXP ::= EXPT 
             {
               SymAttributes RESULT =null;
 		int eleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
@@ -900,7 +903,7 @@ RESULT=new SymAttributes("error", e1.getRow(), e1.getCol(), e1.getName());
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 27: // EXPT ::= EXPT mul FACTOR 
+          case 28: // EXPT ::= EXPT mul FACTOR 
             {
               SymAttributes RESULT =null;
 		int eleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)).left;
@@ -915,7 +918,7 @@ RESULT=e;
 }else if((e.getType().equals("error"))||(f.getType().equals("error"))){
 RESULT=new SymAttributes("error", e.getRow(), e.getCol(), e.getName());
 }else{
-System.out.println("El tipo de los operandos de la multiplicación no coincide. Línea "+e.getRow()+", columna "+e.getCol());
+System.out.println("El tipo de los operandos de la multiplicaci�n no coincide. L�nea "+e.getRow()+", columna "+e.getCol());
 RESULT=new SymAttributes("error", e.getRow(), e.getCol(), e.getName());
 }
 
@@ -924,7 +927,7 @@ RESULT=new SymAttributes("error", e.getRow(), e.getCol(), e.getName());
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 28: // EXPT ::= EXPT div FACTOR 
+          case 29: // EXPT ::= EXPT div FACTOR 
             {
               SymAttributes RESULT =null;
 		int eleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)).left;
@@ -939,7 +942,7 @@ RESULT=e;
 }else if((e.getType().equals("error"))||(f.getType().equals("error"))){
 RESULT=new SymAttributes("error", e.getRow(), e.getCol(), e.getName());
 }else{
-System.out.println("El tipo de los operandos de la división no coincide. Línea "+e.getRow()+", columna "+e.getCol());
+System.out.println("El tipo de los operandos de la divisi�n no coincide. L�nea "+e.getRow()+", columna "+e.getCol());
 RESULT=new SymAttributes("error", e.getRow(), e.getCol(), e.getName());
 }
 
@@ -948,7 +951,7 @@ RESULT=new SymAttributes("error", e.getRow(), e.getCol(), e.getName());
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 29: // EXPT ::= FACTOR 
+          case 30: // EXPT ::= FACTOR 
             {
               SymAttributes RESULT =null;
 		int fleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
@@ -960,7 +963,7 @@ RESULT=new SymAttributes("error", e.getRow(), e.getCol(), e.getName());
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 30: // FACTOR ::= tid l_par LID r_par 
+          case 31: // FACTOR ::= tid l_par LID r_par 
             {
               SymAttributes RESULT =null;
 		int idleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-3)).left;
@@ -969,7 +972,7 @@ RESULT=new SymAttributes("error", e.getRow(), e.getCol(), e.getName());
 		 
 Scope scope=ScopeTree.getCurrentScope();
 SymAttributes symbol=null;
-while (scope.getParent()!=null){
+while (scope!=null){
 symbol=scope.getSymTable().getAttributes(id.getName());
 if (symbol!=null){
 break; // lo hemos encontrado!
@@ -977,7 +980,7 @@ break; // lo hemos encontrado!
 scope=scope.getParent();
 }
 if (symbol==null){
-System.out.println("No se encuentra el símbolo especificado. Línea "+id.getLine()+", columna "+id.getColumn());
+System.out.println("No se encuentra el s�mbolo especificado. L�nea "+id.getLine()+", columna "+id.getColumn());
 RESULT=new SymAttributes("error", id.getLine(), id.getColumn(), id.getName());
 }else{
 RESULT=new SymAttributes(symbol.getType(), id.getLine(), id.getColumn(), id.getName());
@@ -988,7 +991,7 @@ RESULT=new SymAttributes(symbol.getType(), id.getLine(), id.getColumn(), id.getN
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 31: // FACTOR ::= l_bracket EXP r_bracket 
+          case 32: // FACTOR ::= l_bracket EXP r_bracket 
             {
               SymAttributes RESULT =null;
 		int eleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)).left;
@@ -1000,7 +1003,7 @@ RESULT=new SymAttributes(symbol.getType(), id.getLine(), id.getColumn(), id.getN
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 32: // FACTOR ::= tid 
+          case 33: // FACTOR ::= tid 
             {
               SymAttributes RESULT =null;
 		int idleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
@@ -1009,7 +1012,7 @@ RESULT=new SymAttributes(symbol.getType(), id.getLine(), id.getColumn(), id.getN
 		 
 Scope scope=ScopeTree.getCurrentScope();
 SymAttributes symbol=null;
-while (scope.getParent()!=null){
+while (scope!=null){
 symbol=scope.getSymTable().getAttributes(id.getName());
 if (symbol!=null){
 break; // lo hemos encontrado!
@@ -1017,7 +1020,7 @@ break; // lo hemos encontrado!
 scope=scope.getParent();
 }
 if (symbol==null){
-System.out.println("No se encuentra el símbolo especificado. Línea "+id.getLine()+", columna "+id.getColumn());
+System.out.println("No se encuentra el s�mbolo especificado. L�nea "+id.getLine()+", columna "+id.getColumn());
 RESULT=new SymAttributes("error", id.getLine(), id.getColumn(), id.getName());
 }else{
 RESULT=new SymAttributes(symbol.getType(), id.getLine(), id.getColumn(), id.getName());
@@ -1028,7 +1031,7 @@ RESULT=new SymAttributes(symbol.getType(), id.getLine(), id.getColumn(), id.getN
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 33: // FACTOR ::= constint 
+          case 34: // FACTOR ::= constint 
             {
               SymAttributes RESULT =null;
 		int cleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
@@ -1040,7 +1043,7 @@ RESULT=new SymAttributes(symbol.getType(), id.getLine(), id.getColumn(), id.getN
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 34: // FACTOR ::= constfloat 
+          case 35: // FACTOR ::= constfloat 
             {
               SymAttributes RESULT =null;
 		int cleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
@@ -1052,7 +1055,7 @@ RESULT=new SymAttributes(symbol.getType(), id.getLine(), id.getColumn(), id.getN
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 35: // FACTOR ::= constbool 
+          case 36: // FACTOR ::= constbool 
             {
               SymAttributes RESULT =null;
 		int cleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
@@ -1064,7 +1067,7 @@ RESULT=new SymAttributes(symbol.getType(), id.getLine(), id.getColumn(), id.getN
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 36: // TYPE ::= tvoid 
+          case 37: // TYPE ::= tvoid 
             {
               Element RESULT =null;
 		int tleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
@@ -1076,7 +1079,7 @@ RESULT=new SymAttributes(symbol.getType(), id.getLine(), id.getColumn(), id.getN
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 37: // TYPE ::= tint 
+          case 38: // TYPE ::= tint 
             {
               Element RESULT =null;
 		int tleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
@@ -1088,7 +1091,7 @@ RESULT=new SymAttributes(symbol.getType(), id.getLine(), id.getColumn(), id.getN
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 38: // TYPE ::= tfloat 
+          case 39: // TYPE ::= tfloat 
             {
               Element RESULT =null;
 		int tleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
@@ -1100,7 +1103,7 @@ RESULT=new SymAttributes(symbol.getType(), id.getLine(), id.getColumn(), id.getN
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 39: // TYPE ::= tbool 
+          case 40: // TYPE ::= tbool 
             {
               Element RESULT =null;
 		int tleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
@@ -1112,7 +1115,7 @@ RESULT=new SymAttributes(symbol.getType(), id.getLine(), id.getColumn(), id.getN
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 40: // LCOND ::= LCOND tor LCONDT 
+          case 41: // LCOND ::= LCOND tor LCONDT 
             {
               SymAttributes RESULT =null;
 		int dleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)).left;
@@ -1127,7 +1130,7 @@ RESULT=d;
 }else if((d.getType().equals("error")||t.getType().equals("error"))){
 RESULT=new SymAttributes("error", d.getRow(), d.getCol(), d.getName());
 }else{
-System.out.println("Los operandos no son compatibles con el operador or. Línea "+d.getRow()+", columna "+d.getCol());
+System.out.println("Los operandos no son compatibles con el operador or. L�nea "+d.getRow()+", columna "+d.getCol());
 RESULT=new SymAttributes("error", d.getRow(), d.getCol(), d.getName());
 }
 
@@ -1136,7 +1139,7 @@ RESULT=new SymAttributes("error", d.getRow(), d.getCol(), d.getName());
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 41: // LCOND ::= LCONDT 
+          case 42: // LCOND ::= LCONDT 
             {
               SymAttributes RESULT =null;
 		int tleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
@@ -1148,7 +1151,7 @@ RESULT=new SymAttributes("error", d.getRow(), d.getCol(), d.getName());
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 42: // LCONDT ::= LCONDT tand LCONDF 
+          case 43: // LCONDT ::= LCONDT tand LCONDF 
             {
               SymAttributes RESULT =null;
 		int tleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)).left;
@@ -1163,7 +1166,7 @@ RESULT=t;
 }else if((t.getType().equals("error"))||(f.getType().equals("error"))){
 RESULT=new SymAttributes("error", t.getRow(), t.getCol(), t.getName());
 }else{
-System.out.println("Los operandos no son compatibles con el operador and. Línea "+t.getRow()+", columna "+t.getCol());
+System.out.println("Los operandos no son compatibles con el operador and. L�nea "+t.getRow()+", columna "+t.getCol());
 RESULT=new SymAttributes("error", t.getRow(), t.getCol(), t.getName());
 }
 
@@ -1172,7 +1175,7 @@ RESULT=new SymAttributes("error", t.getRow(), t.getCol(), t.getName());
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 43: // LCONDT ::= LCONDF 
+          case 44: // LCONDT ::= LCONDF 
             {
               SymAttributes RESULT =null;
 		int lleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
@@ -1184,7 +1187,7 @@ RESULT=new SymAttributes("error", t.getRow(), t.getCol(), t.getName());
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 44: // LCONDF ::= COND 
+          case 45: // LCONDF ::= COND 
             {
               SymAttributes RESULT =null;
 		int cleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
@@ -1196,7 +1199,7 @@ RESULT=new SymAttributes("error", t.getRow(), t.getCol(), t.getName());
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 45: // LCONDF ::= tnot COND 
+          case 46: // LCONDF ::= tnot COND 
             {
               SymAttributes RESULT =null;
 		int cleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
@@ -1208,7 +1211,7 @@ RESULT=new SymAttributes("error", t.getRow(), t.getCol(), t.getName());
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 46: // COND ::= EXP OPR EXP 
+          case 47: // COND ::= EXP OPR EXP 
             {
               SymAttributes RESULT =null;
 		int e1left = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)).left;
@@ -1223,7 +1226,7 @@ RESULT=e1;
 }else if((e1.getType().equals("error"))||(e2.getType().equals("error"))){
 RESULT=new SymAttributes("error", e1.getRow(), e1.getCol(), e1.getName());
 }else{
-System.out.println("No se pueden comparar 2 elementos de distinto tipo. Línea "+e1.getRow()+", columna "+e1.getCol()+". El primero es de tipo "+e1.getType()+", y el segundo es "+e2.getType());
+System.out.println("No se pueden comparar 2 elementos de distinto tipo. L�nea "+e1.getRow()+", columna "+e1.getCol()+". El primero es de tipo "+e1.getType()+", y el segundo es "+e2.getType());
 RESULT=new SymAttributes("error", e1.getRow(), e1.getCol(), e1.getName());
 }
 
@@ -1232,7 +1235,7 @@ RESULT=new SymAttributes("error", e1.getRow(), e1.getCol(), e1.getName());
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 47: // OPR ::= equals 
+          case 48: // OPR ::= equals 
             {
               Object RESULT =null;
 
@@ -1241,7 +1244,7 @@ RESULT=new SymAttributes("error", e1.getRow(), e1.getCol(), e1.getName());
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 48: // OPR ::= less 
+          case 49: // OPR ::= less 
             {
               Object RESULT =null;
 
@@ -1250,7 +1253,7 @@ RESULT=new SymAttributes("error", e1.getRow(), e1.getCol(), e1.getName());
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 49: // OPR ::= greater 
+          case 50: // OPR ::= greater 
             {
               Object RESULT =null;
 
@@ -1259,7 +1262,7 @@ RESULT=new SymAttributes("error", e1.getRow(), e1.getCol(), e1.getName());
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 50: // OPR ::= greaterequal 
+          case 51: // OPR ::= greaterequal 
             {
               Object RESULT =null;
 
@@ -1268,7 +1271,7 @@ RESULT=new SymAttributes("error", e1.getRow(), e1.getCol(), e1.getName());
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 51: // OPR ::= lessequal 
+          case 52: // OPR ::= lessequal 
             {
               Object RESULT =null;
 

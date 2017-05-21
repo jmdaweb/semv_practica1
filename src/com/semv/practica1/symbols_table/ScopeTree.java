@@ -7,16 +7,13 @@ public class ScopeTree {
 		return ScopeTree.root;
 	}
 	public static Scope getCurrentScope(){
-		if (ScopeTree.currentScope==null){
-			System.out.println("Cuidado, que va nulo");
-		}
 		return ScopeTree.currentScope;
 	}
 	public static void setCurrentScope(Scope sc){
 		ScopeTree.currentScope=sc;
 	}
 	public static void initialize(){
-		ScopeTree.root=new Scope(null, "main", "void");
+		ScopeTree.root=new Scope(null, "root", "void");
 		ScopeTree.currentScope=root;
 	}
 	private static void mostrar(Scope sc){

@@ -722,159 +722,159 @@ public class AnalizadorLexico implements java_cup.runtime.Scanner {
             }
           case 43: break;
           case 3: 
-            { System.out.println(yytext()); return new Symbol(sym.div);
+            { return new Symbol(sym.div);
             }
           case 44: break;
           case 4: 
-            { System.out.println(yytext()); return new Symbol(sym.mul);
+            { return new Symbol(sym.mul);
             }
           case 45: break;
           case 5: 
-            { System.out.println(yytext()); return new Element(yytext(), yyline, yycolumn, sym.tid);
+            { return new Element(yytext(), yyline, yycolumn, sym.tid);
             }
           case 46: break;
           case 6: 
-            { System.out.println(yytext()); return new Symbol(sym.l_par);
+            { return new Symbol(sym.l_par);
             }
           case 47: break;
           case 7: 
-            { System.out.println(yytext()); return new Symbol(sym.r_par);
+            { return new Symbol(sym.r_par);
             }
           case 48: break;
           case 8: 
-            { System.out.println(yytext()); return new Symbol(sym.l_bracket);
+            { return new Symbol(sym.l_bracket);
             }
           case 49: break;
           case 9: 
-            { System.out.println(yytext()); return new Symbol(sym.r_bracket);
+            { return new Symbol(sym.r_bracket);
             }
           case 50: break;
           case 10: 
-            { System.out.println(yytext()); return new Symbol(sym.l_brace);
+            { return new Symbol(sym.l_brace);
             }
           case 51: break;
           case 11: 
-            { System.out.println(yytext()); return new Symbol(sym.r_brace);
+            { return new Symbol(sym.r_brace);
             }
           case 52: break;
           case 12: 
-            { System.out.println(yytext()); return new Symbol(sym.comma);
+            { return new Symbol(sym.comma);
             }
           case 53: break;
           case 13: 
-            { System.out.println(yytext()); return new Symbol(sym.semicolon);
+            { return new Symbol(sym.semicolon);
             }
           case 54: break;
           case 14: 
-            { System.out.println(yytext()); return new Symbol(sym.assig);
+            { return new Symbol(sym.assig);
             }
           case 55: break;
           case 15: 
-            { System.out.println(yytext()); return new Symbol(sym.add);
+            { return new Symbol(sym.add);
             }
           case 56: break;
           case 16: 
-            { System.out.println(yytext()); return new Symbol(sym.sub);
+            { return new Symbol(sym.sub);
             }
           case 57: break;
           case 17: 
-            { System.out.println(yytext()); return new Symbol(sym.less);
+            { return new Symbol(sym.less);
             }
           case 58: break;
           case 18: 
-            { System.out.println(yytext()); return new Symbol(sym.greater);
+            { return new Symbol(sym.greater);
             }
           case 59: break;
           case 19: 
-            { System.out.println(yytext()); return new Element(yytext(), yyline, yycolumn, sym.constint);
+            { return new Element(yytext(), yyline, yycolumn, sym.constint);
             }
           case 60: break;
           case 20: 
-            { System.out.println(yytext()); return new Symbol(sym.tor);
+            { return new Symbol(sym.tor);
             }
           case 61: break;
           case 21: 
-            { System.out.println(yytext()); return new Symbol(sym.tif);
+            { return new Symbol(sym.tif);
             }
           case 62: break;
           case 22: 
-            { System.out.println(yytext()); return new Symbol(sym.tdo);
+            { return new Symbol(sym.tdo);
             }
           case 63: break;
           case 23: 
-            { System.out.println(yytext()); return new Symbol(sym.equals);
+            { return new Symbol(sym.equals);
             }
           case 64: break;
           case 24: 
-            { System.out.println(yytext()); return new Symbol(sym.lessequal);
+            { return new Symbol(sym.lessequal);
             }
           case 65: break;
           case 25: 
-            { System.out.println(yytext()); return new Symbol(sym.greaterequal);
+            { return new Symbol(sym.greaterequal);
             }
           case 66: break;
           case 26: 
-            { System.out.println(yytext()); return new Element(yytext(), yyline, yycolumn, sym.hfile);
+            { return new Element(yytext(), yyline, yycolumn, sym.hfile);
             }
           case 67: break;
           case 27: 
-            { System.out.println(yytext()); return new Element(yytext(), yyline, yycolumn, sym.tint);
+            { return new Element(yytext(), yyline, yycolumn, sym.tint);
             }
           case 68: break;
           case 28: 
-            { System.out.println(yytext()); return new Symbol(sym.tnot);
+            { return new Symbol(sym.tnot);
             }
           case 69: break;
           case 29: 
-            { System.out.println(yytext()); return new Symbol(sym.tfor);
+            { return new Symbol(sym.tfor);
             }
           case 70: break;
           case 30: 
-            { System.out.println(yytext()); return new Symbol(sym.tand);
+            { return new Symbol(sym.tand);
             }
           case 71: break;
           case 31: 
-            { System.out.println(yytext()); return new Element(yytext(), yyline, yycolumn, sym.constfloat);
+            { return new Element(yytext(), yyline, yycolumn, sym.constfloat);
             }
           case 72: break;
           case 32: 
-            { System.out.println(yytext()); return new Element(yytext(), yyline, yycolumn, sym.tvoid);
+            { return new Element(yytext(), yyline, yycolumn, sym.tvoid);
             }
           case 73: break;
           case 33: 
-            { System.out.println(yytext()); return new Symbol(sym.telse);
+            { return new Symbol(sym.telse);
             }
           case 74: break;
           case 34: 
-            { System.out.println(yytext()); return new Element(yytext(), yyline, yycolumn, sym.constbool);
+            { return new Element(yytext(), yyline, yycolumn, sym.constbool);
             }
           case 75: break;
           case 35: 
-            { System.out.println(yytext()); return new Symbol(sym.tthen);
+            { return new Symbol(sym.tthen);
             }
           case 76: break;
           case 36: 
-            { System.out.println(yytext()); return new Element(yytext(), yyline, yycolumn, sym.tbool);
+            { return new Element(yytext(), yyline, yycolumn, sym.tbool);
             }
           case 77: break;
           case 37: 
-            { System.out.println(yytext()); return new Symbol(sym.tuntil);
+            { return new Symbol(sym.tuntil);
             }
           case 78: break;
           case 38: 
-            { System.out.println(yytext()); return new Element(yytext(), yyline, yycolumn, sym.tfloat);
+            { return new Element(yytext(), yyline, yycolumn, sym.tfloat);
             }
           case 79: break;
           case 39: 
-            { System.out.println(yytext()); return new Symbol(sym.twhile);
+            { return new Symbol(sym.twhile);
             }
           case 80: break;
           case 40: 
-            { System.out.println(yytext()); return new Symbol(sym.treturn);
+            { return new Symbol(sym.treturn);
             }
           case 81: break;
           case 41: 
-            { System.out.println(yytext()); return new Symbol(sym.include);
+            { return new Symbol(sym.include);
             }
           case 82: break;
           default:

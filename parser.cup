@@ -78,33 +78,23 @@ RESULT=p2;
 ;
 
 PART ::= TYPE:t {:
-System.out.println("Estableciendo nuevo scope");
 Scope scope=new Scope(ScopeTree.getCurrentScope(), "", t.getName());
 ScopeTree.getCurrentScope().addChild(scope);
 ScopeTree.setCurrentScope(scope);
 :}
 RESTPART:r {:
-Scope scope=ScopeTree.getCurrentScope();
-if (scope.getParent().getSymTable().addItem(r.getName(), new SymAttributes(t.getName(), r.getRow(), r.getCol(), r.getName()))){
-scope.getSymTable().addItem(r.getName(), new SymAttributes(t.getName(), r.getRow(), r.getCol(), r.getName())); //agregamos la función también al hijo
-scope.setName(r.getName());
-scope.setType(t.getName());
+ScopeTree.setCurrentScope(ScopeTree.getCurrentScope().getParent());
 RESULT=r;
-}else{
-System.out.println("Identificador de función duplicado. Línea "+r.getRow()+", columna "+r.getCol());
-RESULT=new SymAttributes("error", r.getRow(), r.getCol(), r.getName());
-}
-if ((ScopeTree.getCurrentScope().getName().equals("main"))&&(ScopeTree.getCurrentScope().getParent()==ScopeTree.getRoot())){
-ScopeTree.getRoot().setSymTable(scope.getSymTable());
-scope.getParent().removeChild(scope);
-scope.getParent().setType(t.getName());
-}
-System.out.println("Volviendo al padre");
-ScopeTree.setCurrentScope(scope.getParent());
 :}
 ;
 
-RESTPART ::= tid:id l_par LISTPARAM:l r_par BLQ:b {:
+RESTPART ::= tid:id {:
+Scope scope=ScopeTree.getCurrentScope();
+if (scope.getParent().getSymTable().addItem(id.getName(), new SymAttributes(scope.getType(), id.getLine(), id.getColumn(), id.getName()))){
+scope.setName(id.getName());
+}
+:}
+l_par LISTPARAM:l r_par BLQ:b {:
 if ((b.getType().equals("error"))||(l.getType().equals("error"))){
 RESULT=b; //propagamos el error
 }else{
@@ -121,7 +111,7 @@ SymAttributes symbol=new SymAttributes(t.getName(), id.getLine(), id.getColumn()
 if (ScopeTree.getCurrentScope().getSymTable().addItem(symbol.getName(), symbol)){
 RESULT=symbol;
 }else{
-System.out.println("Identificador repetido en la cabecera de la función. Línea "+symbol.getRow()+", columna "+symbol.getCol());
+System.out.println("Identificador repetido en la cabecera de la funci�n. L�nea "+symbol.getRow()+", columna "+symbol.getCol());
 RESULT=new SymAttributes("error", symbol.getRow(), symbol.getCol(), symbol.getName());
 }
 }
@@ -154,7 +144,7 @@ if (ScopeTree.getCurrentScope().getSymTable().addItem(id.getName(), symAttribute
 		RESULT = symAttributes;
 	}
 	else{
-		System.out.println("El símbolo " + id.getName() + " existe. Lin " + id.getLine() + " Col " + id.getColumn());
+		System.out.println("El s�mbolo " + id.getName() + " existe. Lin " + id.getLine() + " Col " + id.getColumn());
 		RESULT=new SymAttributes("error", -1, -1, "error");
 		break;
 	}
@@ -163,7 +153,7 @@ if (ScopeTree.getCurrentScope().getSymTable().addItem(id.getName(), symAttribute
     | tid:id assig EXP:exp semicolon  {:
 SymAttributes symbol=null;
 Scope scope=ScopeTree.getCurrentScope();
-while (scope.getParent()!=null){
+while (scope!=null){
 symbol=scope.getSymTable().getAttributes(id.getName());
 if (symbol!=null){
 break; // lo hemos encontrado!
@@ -171,7 +161,7 @@ break; // lo hemos encontrado!
 scope=scope.getParent();
 }
 if (symbol==null){
-System.out.println("No se encuentra el símbolo "+id.getName()+" al que se hace referencia en línea "+id.getLine()+", columna "+id.getColumn());
+System.out.println("No se encuentra el s�mbolo "+id.getName()+" al que se hace referencia en l�nea "+id.getLine()+", columna "+id.getColumn());
 RESULT=new SymAttributes("error", id.getLine(), id.getColumn(), id.getName());
 }else{
 if (symbol.getType().equals(exp.getType())){
@@ -179,7 +169,7 @@ RESULT=exp;
 }else if((symbol.getType().equals("error"))||(exp.getType().equals("error"))){
 RESULT=new SymAttributes("error", symbol.getRow(), symbol.getCol(), symbol.getName());
 }else{
-System.out.println("No se puede asignar la expresión a la variable "+symbol.getName()+", línea "+symbol.getRow()+", columna "+symbol.getCol());
+System.out.println("No se puede asignar la expresi�n a la variable "+symbol.getName()+", l�nea "+symbol.getRow()+", columna "+symbol.getCol());
 RESULT=new SymAttributes("error", symbol.getRow(), symbol.getCol(), symbol.getName());
 }
 }
@@ -187,7 +177,7 @@ RESULT=new SymAttributes("error", symbol.getRow(), symbol.getCol(), symbol.getNa
     | tid:id l_par LID r_par semicolon  {:
 SymAttributes symbol=null;
 Scope scope=ScopeTree.getCurrentScope();
-while (scope.getParent()!=null){
+while (scope!=null){
 symbol=scope.getSymTable().getAttributes(id.getName());
 if (symbol!=null){
 break; // lo hemos encontrado!
@@ -195,7 +185,7 @@ break; // lo hemos encontrado!
 scope=scope.getParent();
 }
 if (symbol==null){
-System.out.println("No se encuentra el símbolo "+id.getName()+" al que se hace referencia en línea "+id.getLine()+", columna "+id.getColumn());
+System.out.println("No se encuentra el s�mbolo "+id.getName()+" al que se hace referencia en l�nea "+id.getLine()+", columna "+id.getColumn());
 RESULT=new SymAttributes("error", id.getLine(), id.getColumn(), id.getName());
 }else{
 RESULT=new SymAttributes(symbol.getType(), id.getLine(), id.getColumn(), id.getName());
@@ -205,7 +195,7 @@ RESULT=new SymAttributes(symbol.getType(), id.getLine(), id.getColumn(), id.getN
 if ((ScopeTree.getCurrentScope().getType().equals(e.getType()))||(e.getType().equals("error"))){
 RESULT=e;
 }else{
-System.out.println("La sentencia return no devuelve un valor del tipo esperado. Línea "+e.getRow()+", columna "+e.getCol());
+System.out.println("La sentencia return no devuelve un valor del tipo esperado. L�nea "+e.getRow()+", columna "+e.getCol());
 RESULT=new SymAttributes("error", e.getRow(), e.getCol(), e.getName());
 }
 :}
@@ -230,11 +220,11 @@ else if(b.getType().equals("error")){
 RESULT=new SymAttributes("error", b.getRow(), b.getCol(), b.getName());
 }
 else {
-//no hay errores en las expresiones, vamos a ver si existen los símbolos
+//no hay errores en las expresiones, vamos a ver si existen los s�mbolos
 SymAttributes symbol1=null;
 SymAttributes symbol2=null;
 Scope scope=ScopeTree.getCurrentScope();
-while (scope.getParent()!=null){
+while (scope!=null){
 if (symbol1==null){
 symbol1=scope.getSymTable().getAttributes(id1.getName());
 }
@@ -247,10 +237,10 @@ break; // hemos encontrado los 2
 scope=scope.getParent();
 }
 if (symbol1==null){
-System.out.println("No se encuentra el símbolo "+id1.getName()+" al que se hace referencia en línea "+id1.getLine()+", columna "+id1.getColumn());
+System.out.println("No se encuentra el s�mbolo "+id1.getName()+" al que se hace referencia en l�nea "+id1.getLine()+", columna "+id1.getColumn());
 RESULT=new SymAttributes("error", id1.getLine(), id1.getColumn(), id1.getName());
 }else if(symbol2==null){
-System.out.println("No se encuentra el símbolo "+id2.getName()+" al que se hace referencia en línea "+id2.getLine()+", columna "+id2.getColumn());
+System.out.println("No se encuentra el s�mbolo "+id2.getName()+" al que se hace referencia en l�nea "+id2.getLine()+", columna "+id2.getColumn());
 RESULT=new SymAttributes("error", id2.getLine(), id2.getColumn(), id2.getName());
 }else{
 RESULT=new SymAttributes("", 0, 0, "");
@@ -294,7 +284,7 @@ RESULT=e1;
 }else if((e1.getType().equals("error"))||(e2.getType().equals("error"))){
 RESULT=new SymAttributes("error", e1.getRow(), e1.getCol(), e1.getName());
 }else{
-System.out.println("El tipo de los operandos de la suma no coincide. Línea "+e1.getRow()+", columna "+e1.getCol());
+System.out.println("El tipo de los operandos de la suma no coincide. L�nea "+e1.getRow()+", columna "+e1.getCol());
 RESULT=new SymAttributes("error", e1.getRow(), e1.getCol(), e1.getName());
 }
 :}
@@ -304,7 +294,7 @@ RESULT=e1;
 }else if((e1.getType().equals("error"))||(e2.getType().equals("error"))){
 RESULT=new SymAttributes("error", e1.getRow(), e1.getCol(), e1.getName());
 }else{
-System.out.println("El tipo de los operandos de la resta no coincide. Línea "+e1.getRow()+", columna "+e1.getCol());
+System.out.println("El tipo de los operandos de la resta no coincide. L�nea "+e1.getRow()+", columna "+e1.getCol());
 RESULT=new SymAttributes("error", e1.getRow(), e1.getCol(), e1.getName());
 }
 :}
@@ -317,7 +307,7 @@ RESULT=e;
 }else if((e.getType().equals("error"))||(f.getType().equals("error"))){
 RESULT=new SymAttributes("error", e.getRow(), e.getCol(), e.getName());
 }else{
-System.out.println("El tipo de los operandos de la multiplicación no coincide. Línea "+e.getRow()+", columna "+e.getCol());
+System.out.println("El tipo de los operandos de la multiplicaci�n no coincide. L�nea "+e.getRow()+", columna "+e.getCol());
 RESULT=new SymAttributes("error", e.getRow(), e.getCol(), e.getName());
 }
 :}
@@ -327,7 +317,7 @@ RESULT=e;
 }else if((e.getType().equals("error"))||(f.getType().equals("error"))){
 RESULT=new SymAttributes("error", e.getRow(), e.getCol(), e.getName());
 }else{
-System.out.println("El tipo de los operandos de la división no coincide. Línea "+e.getRow()+", columna "+e.getCol());
+System.out.println("El tipo de los operandos de la divisi�n no coincide. L�nea "+e.getRow()+", columna "+e.getCol());
 RESULT=new SymAttributes("error", e.getRow(), e.getCol(), e.getName());
 }
 :}
@@ -337,7 +327,7 @@ RESULT=new SymAttributes("error", e.getRow(), e.getCol(), e.getName());
 FACTOR ::= tid:id l_par LID r_par {: 
 Scope scope=ScopeTree.getCurrentScope();
 SymAttributes symbol=null;
-while (scope.getParent()!=null){
+while (scope!=null){
 symbol=scope.getSymTable().getAttributes(id.getName());
 if (symbol!=null){
 break; // lo hemos encontrado!
@@ -345,7 +335,7 @@ break; // lo hemos encontrado!
 scope=scope.getParent();
 }
 if (symbol==null){
-System.out.println("No se encuentra el símbolo especificado. Línea "+id.getLine()+", columna "+id.getColumn());
+System.out.println("No se encuentra el s�mbolo especificado. L�nea "+id.getLine()+", columna "+id.getColumn());
 RESULT=new SymAttributes("error", id.getLine(), id.getColumn(), id.getName());
 }else{
 RESULT=new SymAttributes(symbol.getType(), id.getLine(), id.getColumn(), id.getName());
@@ -355,7 +345,7 @@ RESULT=new SymAttributes(symbol.getType(), id.getLine(), id.getColumn(), id.getN
     | tid:id {: 
 Scope scope=ScopeTree.getCurrentScope();
 SymAttributes symbol=null;
-while (scope.getParent()!=null){
+while (scope!=null){
 symbol=scope.getSymTable().getAttributes(id.getName());
 if (symbol!=null){
 break; // lo hemos encontrado!
@@ -363,7 +353,7 @@ break; // lo hemos encontrado!
 scope=scope.getParent();
 }
 if (symbol==null){
-System.out.println("No se encuentra el símbolo especificado. Línea "+id.getLine()+", columna "+id.getColumn());
+System.out.println("No se encuentra el s�mbolo especificado. L�nea "+id.getLine()+", columna "+id.getColumn());
 RESULT=new SymAttributes("error", id.getLine(), id.getColumn(), id.getName());
 }else{
 RESULT=new SymAttributes(symbol.getType(), id.getLine(), id.getColumn(), id.getName());
@@ -386,7 +376,7 @@ RESULT=d;
 }else if((d.getType().equals("error")||t.getType().equals("error"))){
 RESULT=new SymAttributes("error", d.getRow(), d.getCol(), d.getName());
 }else{
-System.out.println("Los operandos no son compatibles con el operador or. Línea "+d.getRow()+", columna "+d.getCol());
+System.out.println("Los operandos no son compatibles con el operador or. L�nea "+d.getRow()+", columna "+d.getCol());
 RESULT=new SymAttributes("error", d.getRow(), d.getCol(), d.getName());
 }
 :}
@@ -399,7 +389,7 @@ RESULT=t;
 }else if((t.getType().equals("error"))||(f.getType().equals("error"))){
 RESULT=new SymAttributes("error", t.getRow(), t.getCol(), t.getName());
 }else{
-System.out.println("Los operandos no son compatibles con el operador and. Línea "+t.getRow()+", columna "+t.getCol());
+System.out.println("Los operandos no son compatibles con el operador and. L�nea "+t.getRow()+", columna "+t.getCol());
 RESULT=new SymAttributes("error", t.getRow(), t.getCol(), t.getName());
 }
 :}
@@ -416,7 +406,7 @@ RESULT=e1;
 }else if((e1.getType().equals("error"))||(e2.getType().equals("error"))){
 RESULT=new SymAttributes("error", e1.getRow(), e1.getCol(), e1.getName());
 }else{
-System.out.println("No se pueden comparar 2 elementos de distinto tipo. Línea "+e1.getRow()+", columna "+e1.getCol()+". El primero es de tipo "+e1.getType()+", y el segundo es "+e2.getType());
+System.out.println("No se pueden comparar 2 elementos de distinto tipo. L�nea "+e1.getRow()+", columna "+e1.getCol()+". El primero es de tipo "+e1.getType()+", y el segundo es "+e2.getType());
 RESULT=new SymAttributes("error", e1.getRow(), e1.getCol(), e1.getName());
 }
 :}

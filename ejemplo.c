@@ -2,7 +2,9 @@ int factorial(int num){
 if (num==1) then {
 return num;
 }else{
-return num*factorial(num);
+int param;
+param = num - 1;
+return num*factorial(param);
 }
 }
 void main(int argc){
